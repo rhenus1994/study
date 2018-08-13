@@ -116,3 +116,20 @@ CommandError: You must set settings.ALLOWED_HOSTS if DEBUG is False.
 > http-equiv 属性为名称/值对提供了名称。并指示服务器在发送实际的文档之前先在要传送给浏览器的 MIME 文档头部包含名称/值对。 当服务器向浏览器发送文档时，会先发送许多名称/值对。虽然有些服务器会发送许多这种名称/值对，但是所有服务器都至少要发送一个：content-type:text/html。这将告诉浏览器准备接受一个 HTML 文档。  content-type表示内容类型 如 text/html  text/css 等等等等 charset表示编码 expires表示过期时间 set-cookie说明是否存cookie Refresh表示重定向(也可以当刷新用) 这时的content分两部分 如"1;about:blank" 表示1秒后重定向到about:blank 如果后一部分为空 则默认为刷新.
 >
 >   name 属性提供了名称/值对中的名称。HTML 和 XHTML 标签都没有指定任何预先定义的 <meta> 名称。通常情况下，您可以自由使用对自己和源文档的读者来说富有意义的名称。  这几个用name标识 便于搜索引擎抓取  description表示网站描述 keywords表示关键字 author表示作者 revised表示版权信息 generator表示网页生成信息 others其他
+
+
+
+### label标签
+
+```html
+<form>
+  <label for="male">Male</label>
+  <input type="radio" name="sex" id="male" />
+  <br />
+  <label for="female">Female</label>
+  <input type="radio" name="sex" id="female" />
+</form>
+```
+<label> 标签为 input 元素定义标注（标记）。
+label 元素不会向用户呈现任何特殊效果。不过，它为鼠标用户改进了可用性。如果您在 label 元素内点击文本，就会触发此控件。就是说，当用户选择该标签时，浏览器就会自动将焦点转到和标签相关的表单控件上。
+**<label> 标签的 for 属性应当与相关元素的 id 属性相同。**

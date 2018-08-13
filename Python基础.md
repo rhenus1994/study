@@ -784,3 +784,30 @@ print('结束')
 from ipdb import set_trace
 
 set_trace()
+
+
+
+1、halt   立刻关机 2、poweroff  立刻关机 3、shutdown -h now 立刻关机(root用户使用) 
+
+linux有postman客户端
+
+1、reboot 2、shutdown -r now 立刻重启(root用户使用）
+
+
+
+#### Pycharm中快速打印print('a')的方法->'a'.print
+
+模板中快速遍历，直接for然后按tab键，就直接出来了。
+
+
+
+#### python可视化工具pyecharts
+
+Echarts是百度出的很有名 也很叼。  Echarts 是百度开源的一个数据可视化 JS 库。主要用于数据可视化。  pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。
+
+
+
+python数据可视化库seaborn,matplotlib,pyecharts
+
+python数据分析:Numpy,pandas,scipy
+
