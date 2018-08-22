@@ -41,7 +41,7 @@ from decorate import runtime无需再导入time模块也直接可以用runtime�
 
 #### 控制函数失败重启的装饰器,可传参,参数为重启次数
 
-```pyth
+```python
 import requests
 import time
 from functools
@@ -810,4 +810,621 @@ Echarts是百度出的很有名 也很叼。  Echarts 是百度开源的一个�
 python数据可视化库seaborn,matplotlib,pyecharts
 
 python数据分析:Numpy,pandas,scipy
+
+
+
+list方法insert
+
+```python
+def insert(self, index, p_object): 
+    """ L.insert(index, object) -- insert object before index """
+    pass
+l = [1, 2]
+```
+
+
+
+#### 浏览器强制刷新ctrl+shift+R
+
+pycharm整理代码ctrl + alt + L
+
+
+
+#### re模块
+
+```python
+# 若都能匹配到，则
+>>> res1 = re.match('hello','hello world')
+>>> type(res1)
+<class '_sre.SRE_Match'>
+>>> res2 = re.search('hello','hello world')
+>>> type(res2)
+<class '_sre.SRE_Match'>
+>>> res3 = re.findall('hello','hello world')
+>>> type(res3)
+<class 'list'>
+# .group()只能是re.match()和re.search()后的对象使用。group(0)代表匹配到的字符串，group(1)代表自定义的内部小组。group('key')代表你自定义的参数匹配，例如(?P<key>\d+)此类形式。
+# re.findall()方法返回的是个字符串，如果有自定义分组两个及以上，则返回列表，列表内元素为元组，例如
+import re
+s = '/2/3/4/5dsadadsas'
+r = '(\d+)(/)'
+res3 = re.findall(r, s)
+print(res3)
+# 结果[('2', '/'), ('3', '/'), ('4', '/')]
+```
+
+
+
+#### pycharm取消联想使用esc
+
+
+
+#### string库
+
+```python
+string.py
+whitespace = ' \t\n\r\v\f'
+ascii_lowercase = 'abcdefghijklmnopqrstuvwxyz'
+ascii_uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+ascii_letters = ascii_lowercase + ascii_uppercase
+digits = '0123456789'
+hexdigits = digits + 'abcdef' + 'ABCDEF'
+octdigits = '01234567'
+punctuation = r"""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""
+printable = digits + ascii_letters + punctuation + whitespace
+string.capword(s, sep=None) # 将一段话的首字母大写。
+```
+
+
+
+#### 将一句话的首字母大写
+
+```python
+def capword(s, sep=None)：
+	# return (sep or ' ').join(list(map(lambda x: x.capilize(), s.split(sep))))
+    return (sep or ' ').join(i.capitalize() for i in s.split(sep))
+a = "hi i'm mike"
+print(capword(a))
+# 输出结果 -> Hi I'm Mike
+```
+
+str.join()里面可以直接加列表生成器
+
+```python
+>> print(''.join(i for i in ['a', 'b']))
+'ab'
+```
+
+
+
+#### 判断一个字符串是不是数字还是字母
+
+```python
+s.isdigits() # 判断字符串里是不是全是数字
+s.isalpha() # 判断字符串里是不是全是字母
+s.isalnum() # 判断字符串里是不是字母和数字的组合
+```
+
+
+
+#### Pycharm的Structure中的函数和类的顺序是按照字母顺序排列的
+
+
+
+#### Python中super的用法
+
+super 是用来解决多重继承问题的，直接用类名调用父类方法在使用单继承的时候没问题，但是如果使用多继承，会涉及到查找顺序（MRO）、重复调用（钻石继承）等种种问题。总之前人留下的经验就是：保持一致性。要不全部用类名调用父类，要不就全部用 super，不要一半一半。
+
+普通继承
+
+[![复制代码](https://common.cnblogs.com/images/copycode.gif)](javascript:void(0);)
+
+```python
+class FooParent(object):
+    def __init__(self):
+        self.parent = 'I\'m the parent.'
+        print 'Parent'
+    
+    def bar(self,message):
+        print message, 'from Parent'
+        
+class FooChild(FooParent):
+    def __init__(self):
+        FooParent.__init__(self)
+        print 'Child'
+        
+    def bar(self,message):
+        FooParent.bar(self,message)
+        print 'Child bar function.'
+        print self.parent
+        
+if __name__=='__main__':
+    fooChild = FooChild()
+    fooChild.bar('HelloWorld')
+```
+
+ 
+
+super继承
+
+```python
+class FooParent(object):
+    def __init__(self):
+        self.parent = 'I\'m the parent.'
+        print 'Parent'
+    
+    def bar(self,message):
+        print message,'from Parent'
+
+class FooChild(FooParent):
+    def __init__(self):
+        super(FooChild,self).__init__()
+        print 'Child'
+        
+    def bar(self,message):
+        super(FooChild, self).bar(message)
+        print 'Child bar fuction'
+        print self.parent
+
+if __name__ == '__main__':
+    fooChild = FooChild()
+    fooChild.bar('HelloWorld')
+```
+
+
+
+程序运行结果相同，为：
+
+Parent
+Child
+HelloWorld from Parent
+Child bar fuction
+I'm the parent.
+从运行结果上看，普通继承和super继承是一样的。但是其实它们的内部运行机制不一样，这一点在多重继承时体现得很明显。在super机制里可以保证公共父类仅被执行一次，至于执行的顺序，是按照mro进行的（E.__mro__）。
+注意：super继承只能用于新式类，用于经典类时就会报错。
+新式类：必须有继承的类，如果没什么想继承的，那就继承object
+经典类：没有父类，如果此时调用super就会出现错误：『super() argument 1 must be type, not classobj』
+
+ 
+
+更详细的参考
+
+http://blog.csdn.net/johnsonguo/article/details/585193
+
+总结
+　　1. super并不是一个函数，是一个类名，形如super(B, self)事实上调用了super类的初始化函数，
+       产生了一个super对象；
+　　2. super类的初始化函数并没有做什么特殊的操作，只是简单记录了类类型和具体实例；
+　　3. super(B, self).func的调用并不是用于调用当前类的父类的func函数；
+　　4. Python的多继承类是通过mro的方式来保证各个父类的函数被逐一调用，而且保证每个父类函数
+       只调用一次（如果每个类都使用super）；
+　　5. 混用super类和非绑定的函数是一个危险行为，这可能导致应该调用的父类函数没有调用或者一
+       个父类函数被调用多次。
+
+摘自https://www.cnblogs.com/wjx1/p/5084980.html
+
+
+
+#### super内的参数可以省略
+
+```python
+class Animal:
+    def run(self):
+        print('run')
+
+class Cat(Animal):
+    def run(self):
+        print(super())
+        super().run() 
+        # 详写 super(Cat, self).run()
+c = Cat()
+c.run()
+输出:
+<super: <class 'Cat'>, <Cat object>> # super类
+run
+```
+
+
+
+#### 字典的get方法
+
+```python
+def get(self, k, d=None): # real signature unknown; restored from __doc__
+    """ D.get(k[,d]) -> D[k] if k in D, else d.  d defaults to None. """
+    pass
+```
+
+```python
+d = dict(name='lily', age=13)
+print(d.get('class'))
+结果: None
+    
+```
+
+
+
+#### os.path.basename()和os.path.dirname()
+
+```python
+>>> print(os.path.basename('/usr/bin/python3.6')) # 文件名
+>>> print(os.path.dirname('/usr/bin/python3.6')) # 目录名
+python3.6
+/usr/bin
+```
+
+
+
+#### str.partition()方法
+
+```python
+ def partition(self, sep): # real signature unknown; restored from __doc__
+        """
+        S.partition(sep) -> (head, sep, tail)
+        
+        Search for the separator sep in S, and return the part before it,
+        the separator itself, and the part after it.  If the separator is not
+        found, return S and two empty strings.
+        """
+        pass
+```
+
+```python
+>>> s1 = 'a;b'
+>>> s1.partition(';')
+('a', ';', 'b')
+>>> s2 = 'a;b;c'
+>>> s2.partition(';')
+('a', ';', 'b;c)
+>>> s2.partition('/')
+('a;b;c', '', '')
+```
+
+
+
+#### 在python中切忌不要使用str,list,print等builtins.py内自带的方法
+
+```python
+>>> str = 'aaa'
+>>> b = str(123)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'str' object is not callable
+# 相当与重写了str这个对象 本来str是一个类，现在重新赋值变成字符串'aaa'了
+
+>>> str
+<class 'str'>
+>>> str = 'aaa'
+>>> str
+'aaa'
+
+>>> print
+<built-in function print>
+>>> print = 1
+>>> print
+1
+>>> print(2)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'int' object is not callable
+```
+
+
+
+#### enumerate用法
+
+```python
+>>> arr = [1, 2, 3]
+>>> enumerate(arr)
+<enumerate object at 0x7fd19f0c74c8>
+>>> list(enumerate(arr))
+[(0, 1), (1, 2), (2, 3)]
+>>> for i, v in enumerate(arr):
+... 	i ,v
+(0, 1)
+(1, 2)
+(2, 3)
+```
+
+
+
+#### json.dumps()返回一个json字符串
+
+```python
+Serialize ``obj`` to a JSON formatted ``str``
+# 序列化一个对象使其转化为JSON格式的字符串
+# 例如
+>>> m = json.dumps({'name':'lily','age':13})
+'{"name": "lily", "age": 13}'
+>>> type(m)
+<class 'str'>
+```
+
+
+
+#### def f(x, \*, y)中\*的作用
+
+相当于是位置参数和关键字参数的分割，\*号前面是位置参数，*号后面是关键字参数。所以def f(x, \*, y, z):和def f(x, *, y=None, z=None):都可以，但在之后赋值的时候关键词参数部分必须要以关键词参数赋值。
+
+```python
+def f(x, *, y, z, k):
+    print(x +y +z + k)
+
+f(1, 2, 3, 4)
+TypeError: f() takes 1 positional argument but 4 were given # 所以相当于星号前面赋值时要传递位置参数，星号后面要传递关键字参数
+
+f(1, y=2, z=3, k=4)
+10
+# 函数定义时星号后面的形参加不加默认值都没关系
+def f1(x, *, y, z=None, k):
+    print(x +y +z + k)
+def f2(x, *, y=None, z=None, k=None)
+    print(x +y +z + k)
+```
+
+
+
+
+
+#### 什么是序列化
+
+序列化是把模型对象转化为JSON格式然后响应出去，便于客户端进行数据分析。
+
+
+
+#### shift+F6 全局修改变量名
+
+
+
+#### time模块
+
+```python
+# 返回当前时间的时间戳，浮点数，不需要参数
+c = time.time()
+print(c)
+
+# 将时间戳转为UTC时间元组
+t = time.gmtime(c)
+print(t)
+time.struct_time(tm_year=2018, tm_mon=8, tm_mday=21, tm_hour=16, tm_min=22, tm_sec=30, tm_wday=1, tm_yday=233, tm_isdst=0)
+# 将时间戳转为本地时间元组
+b = time.localtime(c)
+print(b)
+time.struct_time(tm_year=2018, tm_mon=8, tm_mday=22, tm_hour=0, tm_min=22, tm_sec=30, tm_wday=2, tm_yday=234, tm_isdst=0)
+# 将本地时间转为时间戳
+m = time.mktime(b)
+print(m)
+
+# 将时间元组转为字符串
+s = time.asctime(b)  # Tue Apr 24 11:35:29 2018
+print(s)
+print(type(s))
+Wed Aug 22 00:22:30 2018
+# 将时间戳转为字符串
+p = time.ctime(c)
+print(p)
+
+# 将时间元组转为指定格式的时间的字符串
+# time.strftime(我们规定的时间格式, 时间元组)
+q = time.strftime("%y-%m-%d  %X", b)
+print(q)
+18-08-22  00:22:30
+# 将时间字符串转为指时间元组
+w = time.strptime(q, "%y-%m-%d %X")
+print(w)
+
+```
+
+
+
+
+
+#### 倒计时计时器
+
+```python
+import time
+import sys
+
+num = 10
+while num:
+    # sys.stdout.write(str('\r%s'%num))
+    print('\r%s' % num) 
+    num -= 1
+    time.sleep(1)
+# 注:\r要放前面，放后面起不到预期效果。
+```
+
+
+
+#### property类
+
+```python
+class property(object):
+    """
+    property(fget=None, fset=None, fdel=None, doc=None) -> property attribute
+    
+    fget is a function to be used for getting an attribute value, and likewise
+    fset is a function for setting, and fdel a function for del'ing, an
+    attribute.  Typical use is to define a managed attribute x:
+    
+    class C(object):
+        def getx(self): return self._x
+        def setx(self, value): self._x = value
+        def delx(self): del self._x
+        x = property(getx, setx, delx, "I'm the 'x' property.")
+    
+    Decorators make defining new properties or modifying existing ones easy:
+    
+    class C(object):
+        @property
+        def x(self):
+            "I am the 'x' property."
+            return self._x
+        @x.setter
+        def x(self, value):
+            self._x = value
+        @x.deleter
+        def x(self):
+            del self._x
+    """
+```
+
+
+
+#### python nonlocal,global
+
+```python
+x = 100
+
+
+def func():
+    global x
+    x = 5
+
+    def funny():
+        nonlocal x
+        # global x
+        # x = 1
+        x += 1
+        print(x)
+        # return x
+
+    funny()
+    print(x)
+
+
+func()
+print(x)
+结果:
+	nonlocal x
+    	^
+SyntaxError: no binding for nonlocal 'x' found
+```
+
+改成
+
+```python
+x = 100
+
+
+def func():
+    nonlocal x
+    x = 5
+
+    def funny():
+        nonlocal x
+        # global x
+        # x = 1
+        x += 1
+        print(x)
+        # return x
+
+    funny()
+    print(x)
+
+
+func()
+print(x)
+结果:
+    nonlocal x
+    ^
+SyntaxError: no binding for nonlocal 'x' found
+# 也会报同样的错误
+```
+
+
+
+#### python是如何进行内存管理的
+
+**a、对象的引用计数机制**
+
+python内部使用引用计数，来保持追踪内存中的对象，Python内部记录了对象有多少个引用，即引用计数，当对象被创建时就创建了一个引用计数，当对象不再需要时，这个对象的引用计数为0时，它被垃圾回收。
+
+**b、垃圾回收**
+
+1>当一个对象的引用计数为零时，它将被垃圾收集机制处理掉。
+
+2>当两个对象a和b互相引用时，del语句可以减少a,b的引用计数，并销毁引用底层对象的名称。然而由于每个对象都包含一个对其他对象的引用，因此引用计数不会归零，对象也不会销毁。（从而导致内存泄漏）。为解决这一问题，解释器会定期执行一个循环检测器，搜索不可访问对象的循环并删除它们。
+
+**c、内存池机制**
+
+Python提供了对内存的垃圾收集机制，但是它将不用的内存放到内存池而不是返回操作系统。
+
+1>Pymalloc机制。为了加速Python的执行效率，Python引入了一个内存池机制，用于管理对小块内存的申请和释放。
+
+2>Python中所有小于256字节的对象都使用pymalloc实现的分配器，而大的对象则使用系统的malloc。
+
+3>对于Python对象，如整数，浮点数和List，都有其独立的私有内存池，对象间不共享他们的内存池。也就是说如果你分配又释放了大量的整数，用于缓存这些整数的内存就不能分配给浮点数了。
+
+
+
+#### list.insert()方法
+
+```python
+def insert(self, index, p_object): # real signature unknown; restored from __doc__
+    """ L.insert(index, object) -- insert object before index """
+    pass
+
+l = [1, 2, 3]
+l.insert(1, 4)
+print(l)
+结果:
+[1, 4, 2, 3]
+```
+
+
+
+#### list.pop()方法
+
+```python
+def pop(self, index=None): # real signature unknown; restored from __doc__
+    """
+    L.pop([index]) -> item -- remove and return item at index (default last).
+    Raises IndexError if list is empty or index is out of range.
+    """
+    pass
+
+>>> l = [1, 2, 3]
+>>> l.pop(1)
+2
+>>> l
+[1, 3]
+>>> l.pop() # 默认删除最后一个元素
+3
+>>> l
+[1]
+```
+
+
+
+#### Python关键词就是除了builtins.py中的方法，函数，变量，类之外的可以不用导入任何库就能直接使用的
+
+```shell
+>>> help('keywords')
+
+Here is a list of the Python keywords.  Enter any keyword to get more help.
+
+False               def                 if                  raise
+None                del                 import              return
+True                elif                in                  try
+and                 else                is                  while
+as                  except              lambda              with
+assert              finally             nonlocal            yield
+break               for                 not                 
+class               from                or                  
+continue            global              pass                
+```
+
+
+
+#### re.sub
+
+
+
+#### python深拷贝浅拷贝
+
+python中对于列表，集合，字典，如果浅拷贝那么拷贝出来的对象和原对象内存地址相同，如若是深拷贝，拷贝出来的对象和原对象内存地址不同。
+
+```python
+
+```
 

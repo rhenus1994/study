@@ -1,5 +1,7 @@
 
 
+git用户名rhenus1994
+
 git init 建立仓库
 
 git add . 将本目录加到暂存区
@@ -19,3 +21,4 @@ git push --set-upstream origin master
 那么需要输入git pull --rebase origin master
 
 然后再git push -u origin master即可
+

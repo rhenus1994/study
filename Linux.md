@@ -1,3 +1,5 @@
+
+
 # Linux
 
 ### 使用pip命令查看环境中已经安装的python包
@@ -722,7 +724,7 @@ sudo apt-get install -f = sudo apt-get --fix-broken
 # 卸载一个已安装的软件包（保留配置文件）：
 $ apt-get remove packagename
 # 卸载一个已安装的软件包（删除配置文件）：
-$ apt-get –purge remove packagename
+$ apt-get --purge remove packagename
 ```
 
 
@@ -784,3 +786,343 @@ CDN的全称是Content Delivery Network，即[内容分发网络](https://baike.
 
 
 ### oneinstack
+
+
+
+### linux安装java环境
+
+sudo apt install default-jre
+
+
+
+### 终端退出快捷键
+
+ctrl+D 可以退出redis客户端，mysql客户端以及远程服务器客户端。
+
+
+
+### 查看ubuntu版本
+
+```shell
+cat /etc/issue
+```
+
+openresty 非阻塞io
+
+查看Linux核心(cat /etc/proc/cpuinfo)
+
+
+
+### vim下复制
+在普通模式下 按yy该行，表示复制了这一行，然后按p就复制了这一行的内容。如果想复制多行，可以按数字+yy，比如3yy,表示复制三行。
+
+
+
+### vim下撤销操作
+
+在普通模式下 按u撤销上次操作。
+
+
+
+### epoll,IO多路复用。
+
+
+
+### virtualenvwrapper
+
+记得要在~/.bashrc文件末尾添加
+
+```shell
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+```
+
+这样设置完毕之后，每次开机后都可以直接WORKON 虚拟环境名直接进入虚拟环境了。
+
+注意:不能直接将外部由virtualenv创建的虚拟环境直接移到~/.virtualenvwrapper中，就算移进去了也是不可用的。
+
+### pip list 与 pip freeze的区别
+
+```shell
+(venv) andy@mac-air:~$ pip freeze
+certifi==2018.8.13
+chardet==3.0.4
+idna==2.7
+requests==2.19.1
+urllib3==1.23
+
+(venv) andy@mac-air:~$ pip list
+Package    Version  
+---------- ---------
+certifi    2018.8.13
+chardet    3.0.4    
+idna       2.7      
+pip        18.0     
+requests   2.19.1   
+setuptools 40.0.0   
+urllib3    1.23     
+wheel      0.31.1  
+# pip freeze的格式更加明确，适合使用pip freeze > requirements.txt 而且没有创建虚拟环境就自带的库setuptools,wheel,pip。都是用户自己安装的库。
+# pip list是表格型的，比较适合看我们的环境里到底有哪些库，而且包含所有的库，包括建虚拟环境就自带的pip库等。
+```
+
+pip freeze > requirements.txt中 > 指的是写入，即把pip freeze现实的结果写入requirements.txt中， >>表示追加。
+
+
+
+### linux删除文件快键键(mac电脑下)
+
+fn + delete 删除文件
+
+delete 返回上一级
+
+
+
+### Linux安装ab命令(Apache Bench)
+
+```shell
+sudo apt-get install apache2-utils
+```
+
+```bash
+Usage: ab [options] [http[s]://]hostname[:port]/path
+
+// 总的请求数
+-n requests Number of requests to perform
+
+// 一次同时并发的请求数 总的请求数(n)=次数*一次并发数(c)
+-c concurrency Number of multiple requests to make
+```
+
+**运行 ab -n 100 -c 10 http://www.meetu.hk/ 对 http://www.meetu.hk/ 进行100次请求，10个并发请求压力测试结果。**
+
+```bash
+Server Software: lighttpd/1.4.20
+Server Hostname: www.meetu.hk
+Server Port: 80
+ 
+Document Path: /
+Document Length: 2095 bytes
+ 
+Concurrency Level: 10
+ 
+//整个测试持续的时间 
+Time taken for tests: 3.303 seconds
+ 
+//完成的请求数量 
+Complete requests: 100
+Failed requests: 0
+Write errors: 0
+Total transferred: 235200 bytes
+HTML transferred: 209500 bytes
+ 
+//平均每秒处理30个请求 
+Requests per second: 30.27 [#/sec] (mean)
+ 
+//平均每个请求处理时间为330毫秒 注:这里将一次10个并发请求看成一个整体 
+Time per request: 330.335 [ms] (mean)
+ 
+//平均每个并发请求处理 时间 为33毫秒 
+Time per request: 33.034 [ms] (mean, across all concurrent requests)
+Transfer rate: 69.53 [Kbytes/sec] received
+ 
+Connection Times (ms)
+min mean[+/-sd] median max
+Connect: 51 170 35.9 178 230
+Processing: 60 153 64.5 121 263
+Waiting: 55 148 64.4 115 258
+Total: 235 322 59.9 299 437
+ 
+Percentage of the requests served within a certain time (ms)
+ 
+//在这100个请求中有50%在299毫秒内完成 
+50% 299
+ 
+//在这100个请求中有66%在312毫秒内完成 
+66% 312
+75% 383
+80% 412
+90% 431
+95% 432
+98% 436
+99% 437
+100% 437 (longest request)
+```
+
+
+
+### Chrome扩展程序商店地址
+
+https://chrome.google.com/webstore/category/extensions
+
+JSONVIEW：一个可以在chrome浏览器上格式化查看json数据的插件，直接在chrome网上应用店搜索下载即可。
+
+
+
+### ubuntu下载Postman工具
+
+ubuntu16.04下postman安装方式:
+
+基本步骤:
+
+1):官网下载软件包:
+
+<https://www.getpostman.com/apps>
+
+2):解压安装:
+
+```
+sudo tar -xzf Postman-linux-x64-6.0.10.tar.gz   	
+```
+
+3):进入解压后的Postman文件夹打开终端,启动Postman 
+
+```
+./Postman/Postman
+```
+
+​    4):创建启动图标,便于快速启动
+
+  建立软链接,创建解压后的Postman文件中的Postman到/usr/bin/目录下
+
+```
+sudo ln -s  /home/c/Downloads/Postman/Postman   /usr/bin/
+```
+
+
+
+### apt-get autoremove命令不要轻易使用
+
+> ## apt-get autoremove 命令你敢不敢用？
+>
+> 用apt时看到有提示，说有些软件包已经不再被需要，可以使用
+>
+> autoremove
+>
+> 命令删除，我是一个希望保持系统简洁性的人，当然不希望系统有太多不需要而仍然存在东西，喜欢简洁性也是选择debian的一个原因嘛。看autoremove的命令，当然是自动给删除一些东西，呵呵，还真智能啊。
+>
+> 在使用的时候发现原来不是这么回事，有多次尴尬的经历，让人哭笑不得：
+> 1，第一次使用autoremove，删除了我N多的软件，删除时就看到删除的软件包有gnome－theme，gnome－background，file－roller（当时有点纳闷）等，删除完再进系统，傻眼了。主题，背景，文件管理，网络管理工具等很多常用的工具没了，可是我之前却被告知“这些软件是什么什么自动安装的，已经不被需要了”，所以我才删除了。第一次产生这样的疑问：autoremove是通过什么判定这些软件不被需要了？
+> 2：有第一次还有第二次，用完automove发现我的锐捷没办法认证了，原来是锐捷需要的libpcap0.8这个被告知“不被需要的工具”被autoremove了。我是每天都要用这个包包的……
+> 3：这是最让人郁闷的一次（我觉得自己很笨，都被愚弄了两次，还要用第三次，大概是因为前两次后果不是很严重），就是今天，因为一些原因，切换的windows下几日。再次回到debian，因为用的是testing，有很多软件包没升级了，所以用apt升级软件包，顺便又看到一些软件包不被需要的提示，于是再次很潇洒的apt-get autoremove，这次又是删除了几个软件包。再次开机，debian警告什么守护进程无法启动，还有一些都没办法去描述的问题。这样说吧，在我自己看来我的debian系统在崩溃的边缘了，看来这次严重了。辛苦经营很久，终于让debian播放电影啊，上网阿，什么什么都弄好了，又出现这样的问题，郁闷死了。我只有打算重新安装debian了，这次安装stable的吧。刚刚硬盘安装也没成功，再试。
+>
+> 那么，autoremove这到底是怎么回事，为什么让我这么受伤害？
+
+
+
+### Ubuntu系统自带Wi-Fi热点
+
+**方法一:**
+
+打开设置，Wi-Fi设置，打开Wi-Fi热点，就会自动生成网络名称和口令了。
+
+**方法二:**
+
+具体方法如下：使用ap-hotspot来创建WIFI热点，而不要用Ad hoc。终端里输入：
+
+$ sudo add-apt-repository ppa:nilarimogard/webupd8
+
+$ sudo apt-get update
+
+$ sudo apt-get install ap-hotspot
+
+$ sudo ap-hotspot configure  //这一步会检查ubuntu的网络和WIFI接口，确定后会提示你配置热点，输入ssid和密码之类的就行了
+
+$ sudo ap-hotspot start
+
+ 
+
+### scrapy startproject ab时报错解决
+
+```shell
+:0: UserWarning: You do not have a working installation of the service_identity module: 'cannot import name 'opentype''.  Please install it from <https://pypi.python.org/pypi/service_identity> and make sure all of its dependencies are satisfied.  Without the service_identity module, Twisted can perform only rudimentary TLS client hostname verification.  Many valid certificate/hostname mappings may be rejected.
+New Scrapy project 'ab', using template directory '/usr/local/lib/python3.5/dist-packages/scrapy/templates/project', created in:
+    /home/theeb/ab
+```
+
+根据提示，去下载和安装`service_identity`,地址为：<https://pypi.python.org/pypi/service_identity#downloads>，下载whl文件 
+
+```shell
+根据提示，去下载和安装service_identity,地址为：https://pypi.python.org/pypi/service_identity#downloads，下载whl文件 
+```
+
+```shell
+C:\Users\lenovo>scrapy version
+:0: UserWarning: You do not have a working installation of the service_identity module: ‘cannot import name ‘opentype‘‘.  Please install it from <https://pypi.python.org/pypi/service_identity> and make sure all of its dependencies are satisfied.  Without the service_identity module, Twisted can perform only rudimentary TLS client hostname verification.  Many valid certificate/hostname mappings may be rejected.
+Scrapy 1.5.0
+```
+
+ 　　可见，在scrapy安装时，其实还有点问题的。
+
+　　其实这种情况下scrapy已经安装好了 可以使用 只是有部分功能 有影响就是其中提到的 service_identity模块。其实这个模块是已经安装了的。但是为什么还会报错呢。耗费了我两个小时 各种发帖 搜索。终于在一位大神那里找到了答案。
+　　原因是不知道因为什么原因导致本机上的service_identity模块太老旧，而你通过install安装的时候 不会更新到最新版本。
+
+ 　　然后，再执行.
+
+```shell
+C:\Users\lenovo>pip install service_identity
+C:\Users\lenovo>pip install service_identity --force --upgrade --user
+```
+
+
+
+
+
+### linux重命名文件和文件夹
+
+linux下重命名文件或文件夹的命令mv既可以重命名，又可以移动文件或文件夹.
+
+例子：将目录A重命名为B
+
+mv A B
+
+例子：将/a目录移动到/b下，并重命名为c
+
+mv /a /b/c
+
+ 
+
+### 查看在终端输入scrapy startproject ab时所产生的项目是使用的是哪个python解释器
+
+```shell
+andy@mac-air:~$ which scrapy
+/home/andy/.local/bin/scrapy
+andy@mac-air:~$ vim $(which scrapy)
+```
+
+出现如下脚本文件
+
+```python
+#!/usr/bin/python3
+ 
+# -*- coding: utf-8 -*-
+import re
+import sys
+
+from scrapy.cmdline import execute
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(execute())
+```
+
+正如首行所示，#/usr/bin/python3指定了操作系统执行这个脚本的时候，调用/usr/bin下的python3解释器。
+
+
+
+### #!/usr/bin/python3 和 #!/usr/bin/env python3的区别
+
+脚本语言的第一行，目的就是指出，你想要你的这个文件中的代码用什么可执行程序去运行它，就这么简单
+
+\#!/usr/bin/python3是告诉操作系统执行这个脚本的时候，调用/usr/bin下的python3解释器；
+\#!/usr/bin/env python3这种用法是为了防止操作系统用户没有将python3装在默认的/usr/bin路径里。当系统看到这一行的时候，首先会到env设置里查找python3的安装路径，再调用对应路径下的解释器程序完成操作。
+\#!/usr/bin/python3相当于写死了python3路径;
+\#!/usr/bin/env python3会去环境设置寻找python3目录,推荐这种写法
+
+ 
+
+### 每个Py程序的最开始都有 # /usr/bin/python , 这个到底是什么, 有什么作用?
+
+这是脚本语言共同遵守的规则：当第一行为 #!/path/to/script/interpreter时，指定了用来执行本脚本的解释器。 
+
+注意： 1、必须是文件的第一行 2、必须以#!开头，你丢了一个惊叹号 3、/path/to/script/interpreter是脚本解释器的全路径名。  例如： #!/bin/sh shell脚本 #!/usr/bin/perl perl脚本 #!/usr/bin/python python脚本 #!/usr/bin/python3 python3脚本 #!/usr/bin/python2 python2脚本  而有时不太清楚脚本解释器的具体全路径名；或者开发环境与运行环境的安装路径不同。为了保证兼容性，也可以写作： #!/usr/bin/env python3 这样运行时会自动搜索脚本解释器的绝对路径。 

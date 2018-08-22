@@ -133,3 +133,25 @@ CommandError: You must set settings.ALLOWED_HOSTS if DEBUG is False.
 <label> 标签为 input 元素定义标注（标记）。
 label 元素不会向用户呈现任何特殊效果。不过，它为鼠标用户改进了可用性。如果您在 label 元素内点击文本，就会触发此控件。就是说，当用户选择该标签时，浏览器就会自动将焦点转到和标签相关的表单控件上。
 **<label> 标签的 for 属性应当与相关元素的 id 属性相同。**
+
+
+
+### django在指定文件夹创建app
+
+cd 到指定目录，使用django-admin startapp user.
+
+
+
+### django模板里路由不能使用相对路径
+
+### pycharm可以compare with文件
+
+
+
+### OAUTH2
+
+
+
+### HTTP1.1和1.0版本
+
+主要区别是1.1版本允许多个HTTP请求服用一个TCP连接，以加快传输速度。
