@@ -1,3 +1,7 @@
+
+
+
+
 # Python基础
 
 #### 计算函数运行时间的装饰器
@@ -177,7 +181,7 @@ type只是负责创建类,但创建的类的父类仍然是object.
 
 #### 单例模型
 
-老师之前用到的只是在整个项目中的某一个文件自定义一个类，然后在该py文件中实例化一个对象，别的文件调用这只实例化过一次的类的对象就叫他单例模式
+老师之前用到的只是在整个项目中的某一个文件自定义一个类，然后在该py文件中实例化一个对象，别的文件调用这个实例化过一次的类的对象就叫他单例模式
 
 目前只会一种真正的单例模式：
 
@@ -1416,7 +1420,26 @@ continue            global              pass
 
 
 
-#### re.sub
+#### re.sub()方法将字符串中的 old（旧字符串） 替换成 new(新字符串)
+
+```python
+def sub(pattern, repl, string, count=0, flags=0):
+    """Return the string obtained by replacing the leftmost
+    non-overlapping occurrences of the pattern in string by the
+    replacement repl.  repl can be either a string or a callable;
+    if a string, backslash escapes in it are processed.  If it is
+    a callable, it's passed the match object and must return
+    a replacement string to be used."""
+    return _compile(pattern, flags).sub(repl, string, count)
+```
+
+```python
+import re
+print(re.sub('\s', '*', "Hello I'm Mike!"))
+结果：
+Hello*I'm*Mike!
+# 将字符串里的空白字符转化为*号
+```
 
 
 
@@ -1425,6 +1448,604 @@ continue            global              pass
 python中对于列表，集合，字典，如果浅拷贝那么拷贝出来的对象和原对象内存地址相同，如若是深拷贝，拷贝出来的对象和原对象内存地址不同。
 
 ```python
+import copy
+l1 = [1, 2, 3]
+print(id(l1))
+l2 = copy.deepcopy(l1) # 深拷贝，原对象内存地址不同
+print(id(l2))
+l3 = copy.copy(l1) # 浅拷贝，与原对象内存地址相同
+print(id(l1))
+
+结果:
+140048729134216
+140048729133704
+140048729134216
+```
+
+
+
+#### str.find()方法
+
+```python
+def find(self, sub, start=None, end=None): 
+    """
+    S.find(sub[, start[, end]]) -> int
+
+    Return the lowest index in S where substring sub is found,
+    such that sub is contained within S[start:end].  Optional
+    arguments start and end are interpreted as in slice notation.
+
+    Return -1 on failure.
+    """
+    return 0
+```
+
+str.find()方法，返回在字符串中找到的第一个子串的下标。如果找不到，就返回-1。
+
+```python
+>>> s = 'abc,dea'
+>>> s.find('a')
+0
+>>> s.find('f')
+-1
+```
+
+
+
+#### random.shuffle()方法
+
+```python
+def shuffle(self, x, random=None):
+    """Shuffle list x in place, and return None.
+
+    Optional argument random is a 0-argument function returning a
+    random float in [0.0, 1.0); if it is the default None, the
+    standard random.random will be used.
+
+    """
+```
+
+random.shuffle()方法传入一个列表参数，返回值为None.运行这个方法后，列表内的值会重新排列，而且是随机排列。
+
+```python
+>>> import random
+>>> l = [1, 2, 3, 4]
+>>> print(random.shuffle(l))
+None
+>>> l
+[4, 1, 2, 3]
+```
+
+
+
+#### Python内置的eval()方法
+
+
+
+**描述**
+
+eval() 函数用来执行一个字符串表达式，并返回表达式的值。
+
+**语法**
+
+以下是 eval() 方法的语法:
 
 ```
+eval(expression[, globals[, locals]])
+```
+
+**参数**
+
+- expression -- 表达式。
+- globals -- 变量作用域，全局命名空间，如果被提供，则必须是一个字典对象。
+- locals -- 变量作用域，局部命名空间，如果被提供，可以是任何映射对象。
+
+**返回值**
+
+返回表达式计算结果。
+
+------
+
+**实例**
+
+以下展示了使用 eval() 方法的实例：
+
+```python
+>>> eval('8')
+8
+>>>x = 7
+>>> eval( '3 * x' )
+21
+>>> eval('pow(2,2)')
+4
+>>> eval('2 + 2')
+4
+>>> n=81
+>>> eval("n + 4")
+85
+```
+
+
+
+#### 如何去除字符串中的所有空白字符
+
+- 去除两边空白字符:str.strip()
+- 去除两边及中间空白字符:''.join(str.split())
+- 去除两边及中间空白字符:re.sub('\w', '', str)
+
+
+
+#### type方法可以直接获取对象的类，调用即可实例化
+
+```python
+>>> cls = type([1, 2, 3])
+>>> l = cls()
+>>> l
+[]
+>>> l.append(1)
+>>> l
+[1]
+```
+
+
+
+#### 异或
+
+如果a、b两个值不相同，则异或结果为1。如果a、b两个值相同，异或结果为0。
+
+
+
+#### Pycharm将一个变量的名称全局修改
+
+Ctrl+R 然后选择replace all
+
+还有SHIFT+F6也能达到同样的效果
+
+
+
+#### Python类里面定义了\_\_repr\_\_的
+
+```python
+>>> class A:
+...     def __repr__(self):
+...             return 'hello'
+... 
+>>> a = A()
+>>> a
+hello
+>>> print(a)
+hello
+```
+
+类里定义了\_\_repr\_\_方法，那么无论是在python交互环境直接输入该类的实例化对象，还是print该类的实例化对象，都会调用该方法。
+
+
+
+#### i.e.、e.g.、etc.
+
+![124044119_1_20180206092712128](/home/andy/Desktop/Notes/124044119_1_20180206092712128.jpeg)
+
+
+
+#### raise后面要写上错误信息的详细说明
+
+```python
+raise IndexError
+
+结果:
+Traceback (most recent call last):
+  File "/home/andy/PycharmProjects/contest/test.py", line 1, in <module>
+    raise IndexError
+IndexError
+```
+
+但这样错误信息里会出现raise语句，会比较奇怪
+
+```python
+raise IndexError(
+    'Out of Index!'
+)
+
+结果:
+Traceback (most recent call last):
+  File "/home/andy/PycharmProjects/contest/test.py", line 2, in <module>
+    'Out of Index!'
+IndexError: Out of Index!
+```
+
+所以在错误类别后加上错误的详细说明，就能呈现比较自然的错误信息了，而且还可以自定义错误信息。
+
+
+
+#### 所有类都是type的实例化对象，但所有类的共同父类是object
+
+```python
+from abc import ABCMeta, abstractmethod
+
+
+class A(metaclass=ABCMeta):
+
+    @abstractmethod
+    def load(self, input):
+        return
+
+    @abstractmethod
+    def save(self, output, data):
+        return
+
+
+class B(object):
+    def load(self, input):
+        return input.read()
+
+    def save(self, output, data):
+        return output.write(data)
+
+
+print(isinstance(A, ABCMeta)) # True
+print(isinstance(A, type)) # True
+print(isinstance(B, ABCMeta)) # True
+print(isinstance(B, type)) # True
+print(issubclass(A, object)) # True
+print(issubclass(type, object))# True
+print(issubclass(ABCMeta, object)) # True
+print(issubclass(B, A)) # True
+print(isinstance(B(), A)) # True
+```
+
+
+
+#### 继承一个类后，直接pass就能继承父类的方法与属性
+
+```python
+class A:
+    def __init__(self, name):
+        self.name = name
+    def run(self):
+        return '{0} is there!'.format(self.name)
+
+class B(A):
+    pass
+
+
+b = B('lily')
+print(b.name) 
+'lily'
+print(b.run())
+'lily is there!'
+```
+
+
+
+#### 格式化输出f'{arg}'
+
+```python
+name = 'lily'
+print(f'{name} is good girl!')
+'lily is a good girl'
+```
+
+
+
+#### return a, b 会返回一个元组
+
+```python
+def test(a, b):
+    return a, b
+print(test(1, 2))
+结果:
+(1, 2)
+```
+
+
+
+#### 魔术方法_\_str\_\_与\_\_repr\_\_的相同点与不同点
+
+**相同点**
+
+1. 在print该类的对象时，_\_str\_\_与\_\_repr\_\_都会直接打印在其方法内定义的return值，使对象的表现方式更加清晰。
+
+**不同点**
+
+1. 在python交互式窗口中直接输入该类的对象，仍会调用\_\_repr\_\_方法，
+
+   但_\_str\_\_起不到效果。
+
+2. 如果列表中含有对象，打印该列表时，对象的表现形式会调用\_\_repr\_\_方法，但_\_str\_\_起不到效果，以此类推，元组，字典，集合也是这种情况。
+
+_\_str\_\_
+
+```python
+class A:
+    def __init__(self, num):
+        self.num = num
+
+    def __str__(self):
+        return str(self.num)
+
+
+l = [A(1), A(2), A(3)]
+print(l)
+结果:
+[<__main__.A object at 0x7f5ce7761128>, <__main__.A object at 0x7f5ce76ef630>, <__main__.A object at 0x7f5ce76b57b8>]
+
+```
+
+\_\_repr\_\_
+
+```python
+class A:
+    def __init__(self, num):
+        self.num = num
+
+    def __repr__(self):
+        return str(self.num) # 返回值必须为字符串
+
+
+l = [A(1), A(2), A(3)]
+print(l)
+结果:
+[1, 2, 3]
+```
+
+
+
+#### 类中的私有变量
+
+```python
+class A:
+    def __init__(self, num):
+        self.__num = num
+
+a = A(11)
+print(a.__num)
+结果:
+AttributeError: 'A' object has no attribute '__num'
+print(a._A__num)
+11
+```
+
+可以通过.\_类名\_\_属性名来获取私有属性的值
+
+同时，私有变量是无法被继承的
+
+```python
+class B(A):
+    def get(self):
+    	return self.__num
+
+b = B(13)
+print(b._B__num)
+结果:
+AttributeError: 'B' object has no attribute '_B__num'
+print(b._A__num)
+结果:
+13
+print(b.get())
+结果:
+AttributeError: 'B' object has no attribute '_B__num'
+# 在类里调用self.__num会自动去找self._B__num属性
+print(a.__dict__)
+结果:
+{'_A__num': 11}
+print(b.__dict__)
+结果:
+{'_A__num': 13}
+# 继承过来的是self._A__num属性
+```
+
+
+
+#### 类的\_\_dict\_\_和对象的\_\_dict\_\_的区别以及对象的\_\_dir\_\_方法
+
+```python
+class Cat:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    @classmethod
+    def travel(cls):
+        print('travel')
+
+    @staticmethod
+    def drink():
+        print('drink')
+
+    def run(self):
+        print(self, 'is run')
+
+    def eat(self):
+        print(self, 'is eat')
+
+    def __repr__(self):
+        return self.name
+
+
+print(Cat.__dict__)
+结果:
+{'__module__': '__main__', '__init__': <function Cat.__init__ at 0x7fd884d5b0d0>, 'travel': <classmethod object at 0x7fd884d6a8d0>, 'drink': <staticmethod object at 0x7fd884d6a908>, 'run': <function Cat.run at 0x7fd884d5b7b8>, 'eat': <function Cat.eat at 0x7fd884d5b840>, '__repr__': <function Cat.__repr__ at 0x7fd884d5b8c8>, '__dict__': <attribute '__dict__' of 'Cat' objects>, '__weakref__': <attribute '__weakref__' of 'Cat' objects>, '__doc__': None}
+
+print(Cat('lily', 13).__dict__)
+结果:
+{'name': 'lily', 'age': 13}
+
+print(Cat('lily', 13).__dir__())
+结果:
+['name', 'age', '__module__', '__init__', 'travel', 'drink', 'run', 'eat', '__repr__', '__dict__', '__weakref__', '__doc__', '__hash__', '__str__', '__getattribute__', '__setattr__', '__delattr__', '__lt__', '__le__', '__eq__', '__ne__', '__gt__', '__ge__', '__new__', '__reduce_ex__', '__reduce__', '__subclasshook__', '__init_subclass__', '__format__', '__sizeof__', '__dir__', '__class__']
+
+```
+
+**类的\_\_dict\_\_方法返回的是类(如\_\_module\_\_)以及所有定义的方法，包括类方法，静态方法以及对象方法还有魔术方法。**
+
+**对象的\_\_dict\_\_方法返回的只是对象的属性，不包含任何方法。**
+
+**对象的\_\_dir\_\_方法返回的是一个列表，包含对象的所有属性，以及类的所有属性及方法，包括类方法，静态方法，对象方法以及所有的魔术方法。**
+
+
+
+#### 对象的方法也可以由类来调用
+
+```python
+class Cat:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def run(self):
+        print(self, 'is run')
+
+    def __repr__(self):
+        return self.name
+lily = Cat('lily', 16)
+Cat.run(lily)
+输出:
+'lily is run'
+
+print(Cat.__repr__(lily))
+输出:
+'lily'
+
+Cat.__init__(lily, 'mike', 15)
+print(lily.name)
+输出:
+'mike'
+print(lily.age)
+输出:
+15
+```
+
+
+
+#### 输入一个字符串str，输出最长的对称字符串长度
+
+![699524491](/home/andy/Desktop/Notes/699524491.jpg)
+
+```python
+def count_sym(s):
+    length = len(s)
+    list_s = []
+    for i in range(length - 1):
+        if s[i] == s[i + 1]:
+            count = 2
+            key = 2 * i + 1
+            while i - 1 >= 0 and key - i + 1 <= length - 1:
+                i = i - 1
+                if s[i] != s[key - i]:
+                    break
+                count += 2
+            list_s.append(count)
+        try:
+            if s[i] == s[i + 2]:
+                count = 3
+                key = 2 * i + 2
+                while i - 1 >= 0 and key - i + 1 <= length - 1:
+                    i = i - 1
+                    if s[i] != s[key - i]:
+                        break
+                    count += 2
+                list_s.append(count)
+        except IndexError:
+            continue
+    return max(list_s)
+
+
+print(count_sym('0o1o0'))
+结果:
+5
+```
+
+
+
+#### 循环里continue
+
+```python
+for i in range(1, 10):
+    continue
+    print(1)
+# 1永远不会输出，因为python解释器一遇到continue就会开始下一次循环。while也同理
+while True:
+    continue
+    print(1)
+# 这里1也永远不会输出，因为循环体内一遇到continue就会进入下次循环
+```
+
+
+
+#### range反序遍历
+
+```python
+for i in range(5, 0, -1):
+    print(i)
+结果:
+5
+4
+3
+2
+1
+```
+
+range反序遍历的话，大的数字放前面，小的数字放后面，最后在写个参数1代表反序，然后也是末尾的数取不到。在本案例中，即0取不到。
+
+
+
+#### str.find和str.index的区别
+
+python 字符串查找有4个方法，1 find, 2 index方法，3 rfind方法, 4 rindex方法
+
+find()方法：查找子字符串，若找到返回从0开始的下标值，若找不到返回-1
+
+```python
+info = 'abca'
+print(info.find('a'))　#从下标0开始，查找在字符串里第一个出现的子串，返回结果：0
+ 
+info = 'abca'
+print(info.find('a',1))　#从下标1开始，查找在字符串里第一个出现的子串，返回结果3
+ 
+info = 'abca'
+print(info.find('333')) #返回-1,查找不到返回-1
+
+```
+
+index()方法：python 的index方法是在字符串里查找子串第一次出现的位置，类似字符串的find方法，不过比find方法更好的是，如果查找不到子串，会抛出异常，而不是返回-1
+
+```python
+In [10]: info = ‘abca’
+ 
+In [11]: info.index(‘a’)
+Out[11]: 0
+ 
+In [12]: info.index(’33’)
+—————————————————————————
+ValueError Traceback (most recent call last)
+in ()
+  —-> 1 info.index(’33’)
+ 
+ValueError: substring not found
+```
+
+很显然，抛出了ValueError异常
+
+!!! rfind 和 rindex 方法用法和上面一样，只是从字符串的末尾开始查找
+
+
+
+#### list.index()方法
+
+```python
+ def index(self, value, start=None, stop=None): 
+        """
+        L.index(value, [start, [stop]]) -> integer -- return first index of value.
+        Raises ValueError if the value is not present.
+        """
+        return 0
+```
+
+返回给定值第一次出现的索引，如果不存在，则抛出ValueError的异常。
+
+
+
+
 

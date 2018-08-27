@@ -1126,3 +1126,82 @@ if __name__ == '__main__':
 这是脚本语言共同遵守的规则：当第一行为 #!/path/to/script/interpreter时，指定了用来执行本脚本的解释器。 
 
 注意： 1、必须是文件的第一行 2、必须以#!开头，你丢了一个惊叹号 3、/path/to/script/interpreter是脚本解释器的全路径名。  例如： #!/bin/sh shell脚本 #!/usr/bin/perl perl脚本 #!/usr/bin/python python脚本 #!/usr/bin/python3 python3脚本 #!/usr/bin/python2 python2脚本  而有时不太清楚脚本解释器的具体全路径名；或者开发环境与运行环境的安装路径不同。为了保证兼容性，也可以写作： #!/usr/bin/env python3 这样运行时会自动搜索脚本解释器的绝对路径。 
+
+
+
+### Linux删除文件时点ESC键可以选择是否
+
+
+
+### ll某文件可以直接查看该文件的详细信息
+
+```shell
+andy@mac-air:~$ ll /usr/bin/python
+lrwxrwxrwx 1 root root 10 Aug 16 20:38 /usr/bin/python -> python3.6m*
+# 第一个字母l代表这个文件是个链接文件
+```
+
+ll查看文件夹详细信息
+
+```python
+andy@mac-air:~$ ll ~/c
+total 16
+drwxr-xr-x  4 andy andy 4096 Aug 23 22:19 ./
+drwxr-xr-x 92 andy andy 4096 Aug 23 22:19 ../
+drwxr-xr-x  2 andy andy 4096 Aug 23 22:19 d/
+drwxr-xr-x  2 andy andy 4096 Aug 23 22:19 e/
+```
+
+
+
+### Linux命令中，grep是处理正则表达式的，基本语法为
+
+```shell
+grep [option] pattern [file]
+```
+
+
+
+### 为了将当前目录下所有.TXT文件打包并压缩归档到文件this.tar.gz 我们可以使用tar czvf this.tar.gz ./*.txt
+
+
+
+### 创建用户并加入组
+
+比如说创建xp用户并将用户加入到root组中
+
+```shell
+useradd -g root xp
+```
+
+
+
+
+
+### 删除当前目录及其子目录下名为'core'的文件
+
+```shell
+find . -name core -exec rm {} \
+```
+
+
+
+### 如何查看/etc所占的磁盘ko
+
+```shell
+sudo du -sh /etc # -s代表summary 总结 
+# -h --human-readable print sizes in human readable format(e.g.,1K 234M 2G)
+```
+
+
+
+
+### 如何一次性创建text/1/2/3/4
+
+```shell
+ mkdir–p text/1/2/3/4 
+```
+
+
+
+ 
