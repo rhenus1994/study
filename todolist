@@ -1,0 +1,311 @@
+# 1.两份试卷 3班和4班 外键关联 多表查询 
+# 2.wraps
+3.redis,mongodb,mysql及相应python操作
+4.ajax
+5.bootstrap
+6.socket
+7.scrapy
+8.postman,fiddler
+  9.pubmed
+10.turtle 
+# 11.匿名函数
+12.metaclass 基类
+//13.text()和string(.)
+14.http,https请求
+15.django的主要组成部分
+16.get请求与post请求的区别
+17.django的运行原理
+19.type.__new__() type类型
+  20.收藏夹功能 //已实现功能，还差ajax
+21.static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+22.restful
+//23.extract_fisrt,extract
+24.邮件发送 验证码 手机短信
+# 25.登陆后记录next
+26.移动端适配
+27.分页器
+//28.xpath,css,beautifulsoup,etree等使用
+29.docker
+30.restful
+
+断点调试时,蓝色高亮的那一行尚未执行.
+yield等执行到yield时跳出生成器,并把生成的值作为next(g)函数的返回值.直到调用下一个next()的时候,重新从上次断掉的地方开始执行程序.
+
+
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'blog.score.degree' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
+They are viewport meta tags, and is most applicable on mobile browsers.
+
+width=device-width
+This means, we are telling to the browser “my website adapts to your device width”.
+
+initial-scale
+This defines the scale of the website, This parameter sets the initial zoom level, which means 1 CSS pixel is equal to 1 viewport pixel. This parameter help when you're changing orientation, or preventing default zooming. Without this parameter, responsive site won't work.
+
+maximum-scale
+Maximum-scale defines the maximum zoom. When you access the website, top priority is maximum-scale=1, and it won’t allow the user to zoom.
+
+minimum-scale
+Minimum-scale defines the minimum zoom. This works the same as above, but it defines the minimum scale. This is useful, when maximum-scale is large, and you want to set minimum-scale.
+
+user-scalable
+User-scalable assigned to 1.0 means the website is allowing the user to zoom in or zoom out.
+But if you assign it to user-scalable=no, it means the website is not allowing the user to zoom in or zoom out.
+
+em:An em is a CSS unit that measures the size of a font, from the top of a font’s cap height to. the bottom of its lowest descender. Originally, the em was equal to the width of the capital. letter M, which is where its name originated..
+即equal to M 一种通过字体大小来衡量大小的方法
+rem root em 1rem和根节点的字体大小相同
+如果这个属性根据它的font-size进行测量，则使用em
+其他的一切事物均使用rem.
+
+rem与em都是相对单位，我们使用它们的目的就是为了适应各种手机屏幕。
+rem是根据html根节点来计算的，而em是继承父元素的字体。
+
+
+box-sizing:
+content-box	
+这是由 CSS2.1 规定的宽度高度行为。
+宽度和高度分别应用到元素的内容框。
+在宽度和高度之外绘制元素的内边距和边框。
+border-box	
+为元素设定的宽度和高度决定了元素的边框盒。
+就是说，为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。
+通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。
+
+# text-decoration 用于文本修饰 属性:none(无),overline(上划线),underline(下划线),line-through(文本中间的线)
+# overflow-x: hidden; 水平方向内容溢出那么溢出内容隐藏
+# overflow-y: auto; 垂直方向内容溢出，增显示滚动条以便查看其余内容
+pseudo element 伪元素
+bootstrap 如何实现点击就内陷
+清理病毒
+移动营业厅
+
+
+
+python位运算符
+x<<1 左移运算符  1-> 10 十进制的2
+x>>1 右移运算符  10->5 相当于除以2
+<< 算得快
+下表中变量 a 为 60，b 为 13，二进制格式如下：
+
+a = 0011 1100
+
+b = 0000 1101
+
+-----------------
+
+按位与运算 a&b = 0000 1100
+
+按位或运算 a|b = 0011 1101
+
+按位异或运算 a^b = 0011 0001
+
+按位取反运算 ~a  = 1100 0011
+
+在模板引擎里的注释不能注释掉普通h5标签，必须使用原生的注释符号<!--  -->
+bootstrap-theme.css关于bootstrap主题方面的，比较立体化 而原版bootstrap.css是扁平化的
+bootstrap-theme.css不能单独用，要配合bootstrap.css使用。即要先导入bootstrap.css再导入bootstrap-theme.css.
+
+.box{
+    display:flex;
+}
+.div{
+    flex-grow:1
+}
+这样可以等分
+加了flex就代表在一行了
+
+CSS中!important 作用
+CSS中“!important”可以使它之前的样式优先执行，比如说这样：
+body {
+color : red !important;
+}
+body {
+color : black;
+}
+颜色color出现了两次，而加上“!important”的“color : red;”总会得到优先执行，浏览器将对另一个“color : black;”视而不见。
+之所以会说得复杂，是因为“IE 6.0一直都不支持这个语法，而其他的浏览器都支持。因此可以利用这一点来分别给IE和其他浏览器不同的样式定义”，我认为这只不过是一个小技巧罢了。
+
+{% load static %}
+{% block extCSS %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/cart/cart.css'%}">
+
+{% endblock %}
+{% load static %} 的主要作用就是 该页面可以用反向解析。可以直接这样用{% static 'app/cart/cart.css' %}，不然要写全路径，即href="/static/app/cart/cart.css"。
+{% load static %}
+{% block extCSS %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/cart/cart.css' %}">
+{% endblock %}
+{% load static %}要放在 使用{% static 'app/cart/cart.css' %}的上面，不然会报错。
+
+无论是导入模块，还是导入css,js文件，都记住先后顺序。先导入系统自带的，比如jquery,bootstrap这些要放在前面，然后自己定义的文件要放在后面，从而防止一些自定义样式被覆盖。
+
+元素谁挡住谁，看先后顺序。特别是position： fixed,absolute,relative。写在后面的元素默认显示在在外层。
+user agent stylesheet 浏览器默认样式 
+{% extends 'base.html' %}
+<div style="background-color: aqua;width: 200px;height: 100px;z-index: 9999;position: relative;top: 0"></div>
+模板里这么写，这个div是加载不出来的。
+所以要向下面这样写。
+{% extends 'base.html' %}
+{% block content %}
+<div style="background-color: aqua;width: 200px;height: 100px;z-index: 9999;position: relative;top: 0"></div>
+{% endblock %}      
+
+<a href="/app/handlefav/{{ article.postid }}">收藏</a>前端可以通过路由传递信息
+GET传参
+http://127.0.0.1:8000/index/?a=1&b=1 这样传递了a=1,b=1
+http://127.0.0.1:8000/index/1这样不叫传参，匹配不到路由，会报错。
+http://127.0.0.1:8000/index/?a=1&&b=1 这样传递了a=1,b=1 中间几个&号没关系，以&为分隔符号。
+获取GET传的参数，在视图函数里可以用 request.GET.get('a')此类，不存在返回None.若传了两个名同为a的参数
+则可以用request.GET.getlist('a'),返回一个a的列表。
+def这里不能设置断点
+step into直接就跳到底层源码里面去了就比如一个django请求，直接跳到wsgi.py,http.py这些模块里去了、
+step into my code 只会进自己写的代码里去。
+request.path  /index/ 是指你所请求的那个路由地址。
+<form action="/login/?next={{ next }}" method="post">{% csrf_token %}
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <button type="submit">登录</button>
+</form>
+表单如果这么写，视图函数里requset.GET.get('next')就能取到对应的next路由地址。
+
+
+superuser:is_superuser(最高权限),is_staff(可登录后台),is_active都是True的
+如果是继承了AbstractUser那么is_superuser和is_staff均为False,is_active为True,故不可登录后台。
+
+python的值传递不会改变传入參数的值，而引用传递传入的是一个地址。有点相似c的指针。在运行完毕之后会改变传入地址所指的值。
+t = (2,4,[6,8])
+t[-1].append(1)
+print(t)
+但是t[-1]+=[7]会报错 因为tuple的item是不能被赋值的。
+Python 字典(Dictionary) update() 函数把字典dict2的键/值对更新到dict里
+update()方法语法：
+dict.update(dict2)
+
+1. 在root权限下，useradd只是创建了一个用户名，如 （useradd  +用户名 ），它并没有在/home目录下创建同名文件夹，也没有创建密码，因此利用这个用户登录系统，是登录不了的，为了避免这样的情况出现，可以用 （useradd -m +用户名）的方式创建，它会在/home目录下创建同名文件夹，然后利用（ passwd + 用户名）为指定的用户名设置密码。
+
+2. 可以直接利用adduser创建新用户（adduser +用户名）这样在/home目录下会自动创建同名文件夹
+
+3.  删除用户，只需使用一个简单的命令“userdel 用户名”即可。不过最好将它留在系统上的文件也删除掉，你可以使用“userdel -r 用户名”来实现这一目的。 
+
+su switch user 切换用户  su root su +用户名
+usermod -aG docker andy 将andy用户添加到docker组内
+
+1. 在终端下：
+          复制命令：Ctrl + Shift + C  组合键.
+          粘贴命令：Ctrl + Shift + V  组合键.
+
+$('div:eq(0)')过滤选择器 eq(index)选择器 获取第index个标签。$('input:hidden:eq(0)')获取隐藏的第0个标签
+jquery change事件 文本输入框和下拉框都可以有的事件
+文本框内的内容发生改变并提交时(比如文本框内容改变然后点击其他位置，或者文本框内容发生改变并回车时触发)
+下拉框只要选择了其他选项就会触发。
+例:
+<html>
+<head>
+<script type="text/javascript" src="/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".field").change(function(){
+    $(this).css("background-color","#FFFFCC");
+  });
+});
+</script>
+</head>
+<body>
+<p>在某个域被使用或改变时，它会改变颜色。</p>
+Enter your name: <input class="field" type="text" />
+<p>Car:
+<select class="field" name="cars">
+<option value="volvo">Volvo</option>
+<option value="saab">Saab</option>
+<option value="fiat">Fiat</option>
+<option value="audi">Audi</option>
+</select>
+</p>
+</body>
+</html>
+
+
+def add():
+    yield 1
+f = add()
+f是一个生成器对象,next(f)的值为1
+
+xpath('text()')是拿不到标签下的标签的文字的，比如<h2><a>百度一下，你就知道<a><h2>
+这种情况下是拿不到里面的文字的
+但xpath('string(.)')和xpath('string()')目前没看出有什么区别
+貌似选择器列表也可以使用xpath(string(.)).
+xpath('.//h2).xpath('string(.)')获得的是一个选择器列表
+xpath('.//h2').xpath('string(.)').extract()出来的是一个字符串列表
+xpath('.//h2').xpath('string(.)').extract_first()获取的是列表的第一个元素，字符串
+
+{% autoescape off%}
+	"<p>我<p>"
+{% endautoescape%}
+这样就可以直接显示出h5代码
+默认为on,显示原生字符串
+还可以用过滤器{{detail | safe}}
+也是显示h5代码
+桥接了就可以直接用宿主机的ip直接访问虚拟机里的部署的服务了.
+查看公网IP
+curl members.3322.org/dyndns/getip
+传递文件的软件winSCP
+layui,
+安装mysql
+安装redis
+CommandError: You must set settings.ALLOWED_HOSTS if DEBUG is False.
+url(r'^static/(?P<path>.*)$',serve,{"document_root":settings.STATIC_ROOT})
+谷歌开发者工具，sources一个路由地址一个文件夹
+json.dumps(ensure_ascii=false)
+vim插件 wkt
+sftp
+语忆科技 tornado
+数据清洗一般用正则表达式。
+Socket/TCP粘包、多包和少包, 断包 - CSDN博客
+面向切面编程。
+垃圾回收机制
+内存中的栈和堆
+如何创建user app
+xmind打不开
+脚本语言是什么意思
+解决阿里云服务器问题
+vim快捷键，熟练掌握
+python内部的sort的原理及时间复杂度。
+mysql安装 sudo apt-get install mysql-server
+sudo apt-get install mysql-client
+sudo service mongod restart
+如何建立linux脚本文件
+可以直接vim /usr/bin/pip修改对应的python
+如何查看mongod加载的配置文件
+python操作mysql,sqlite
+如何把字典字符串里所有的键加双引号。
+python面试宝典
+预防xss攻击
+预防csrf攻击
+手写orm
+不用+号实现数字相加。
+线程池
+
+
+
+
+
+搜索二叉树 时间复杂读logn
+平衡二叉树基于平衡二叉搜索树，更加均匀，时间复杂度更小。
+项目做到现在碰到的最大的难点。
+分布式数据库同步问题
+索引的功能
+git
+循环引用
+垃圾计数
+sentry处理bug
+time.clock()
+__getattr__和__getattribute__的区别
+麻将
+迁移文件删除了怎么办
+如何理解模板上下文
+老师那个阻塞式去队列该怎么写，十秒钟取不到自动退出循环
+Python list
+
+

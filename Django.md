@@ -148,10 +148,138 @@ cd 到指定目录，使用django-admin startapp user.
 
 
 
-### OAUTH2
+### OAUTH2(第三方登录的时候使用的协议)
+
+OAUTH协议为用户资源的授权提供了一个安全的、开放而又简易的标准。与以往的授权方式不同之处是OAUTH的授权不会使第三方触及到用户的帐号信息（如用户名与密码），即第三方无需使用用户的用户名与密码就可以申请获得该用户资源的授权，因此OAUTH是安全的。oAuth是Open Authorization的简写。
 
 
 
 ### HTTP1.1和1.0版本
 
 主要区别是1.1版本允许多个HTTP请求服用一个TCP连接，以加快传输速度。
+
+
+
+### Django中类名.objects.get()
+
+如果不存在则返回`DoesNotExist: Task matching query does not exist.`
+
+如果查询到太多则返回`MultipleObjectsReturned: get() returned more than one Task -- it returned 4!`
+
+task表
+
+|  id  | text | completed |
+| :--: | :--: | :-------: |
+|  5   | aaa  |     0     |
+|  6   | bbb  |     1     |
+|  7   | bbb  |     1     |
+|  8   | ddd  |     0     |
+
+```python
+>>> from task.models import Task
+>>> Task.objects.all()
+<QuerySet [<Task: Task object>, <Task: Task object>, <Task: Task object>, <Task: Task object>]>
+>>> Task.objects.filter(completed=1)
+<QuerySet [<Task: Task object>, <Task: Task object>]>
+>>> Task.objects.filter(completed=1).filter(id=7)
+<QuerySet [<Task: Task object>]>
+>>> Task.objects.get(id=1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/andy/.local/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/andy/.local/lib/python3.6/site-packages/django/db/models/query.py", line 379, in get
+    self.model._meta.object_name
+task.models.DoesNotExist: Task matching query does not exist.
+>>> Task.objects.get(id=1,None)
+  File "<console>", line 1
+SyntaxError: positional argument follows keyword argument
+>>> Task.objects.get()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/andy/.local/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/andy/.local/lib/python3.6/site-packages/django/db/models/query.py", line 383, in get
+    (self.model._meta.object_name, num)
+task.models.MultipleObjectsReturned: get() returned more than one Task -- it returned 4!
+>>> Task.objects.get(completed=1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/andy/.local/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/andy/.local/lib/python3.6/site-packages/django/db/models/query.py", line 383, in get
+    (self.model._meta.object_name, num)
+task.models.MultipleObjectsReturned: get() returned more than one Task -- it returned 2!
+```
+
+
+
+### render中第一个参数为request的原因
+
+因为在模板渲染的时候可以用到{{ request.user }}或者直接用{{ user }}，相当于request这个参数要传递到模板上下文中来。
+
+模板文件中
+
+```html
+<p>{{ request.user }}</p>
+```
+
+
+
+在浏览器页面中显示AnonymousUser，因为当前用户尚未登录，所以显示匿名用户。
+
+
+
+### django中间件有哪些方法
+
+**process_request(self,request)**
+
+**process_view(self, request, callback, callback_args, callback_kwargs)**
+
+**process_template_response(self,request,response)**
+
+ 只有在视图函数的返回对象中有render方法才会执行！
+
+并把对象的render方法的返回值返回给用户（注意不返回视图函数的return的结果了，而是返回视图函数 return值（对象）的render方法,相当于对返回值做了二次加工。
+
+```python
+
+from django.shortcuts import render,HttpResponse
+
+# Create your views here.
+class Foo():
+    def __init__(self,requ):
+        self.req=requ
+    def render(self):
+        return HttpResponse('OKKKK')
+
+def index(request):
+    print("执行index")
+    obj=Foo(request)
+    return obj
+```
+
+
+
+**process_exception(self, request, exception)**
+
+**process_response(self, request, response**)
+
+
+
+### 使用sentry进行集中化日志管理
+
+在调试程序中，通过日志分期来排查BUG是一个重要手段，它可以说是程序调试的利器。
+
+#### 关于日志管理
+
+随着应用组件变多，那么各coder对输出日志五花八门，有写入stdout，有写stderr, 有写到syslog，也有写到xxx.log的。那么这将导致平台应用日志分布在各个地方，无法统一管理。
+
+#### 为什么使用Sentry
+
+Sentry是一个集中式日志管理系统。它具备以下优点：
+
+- 多项目，多用户
+- 界面友好
+- 可以配置异常出发规则，例如发送邮件
+- 支持主流语言接口

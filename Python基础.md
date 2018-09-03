@@ -1,10 +1,6 @@
-
-
-
-
 # Python基础
 
-#### 计算函数运行时间的装饰器
+### 计算函数运行时间的装饰器
 
 ```python
 decorate.py
@@ -43,7 +39,7 @@ from decorate import runtime无需再导入time模块也直接可以用runtime�
 
 
 
-#### 控制函数失败重启的装饰器,可传参,参数为重启次数
+### 控制函数失败重启的装饰器,可传参,参数为重启次数
 
 ```python
 import requests
@@ -69,7 +65,6 @@ class Retry:
                 except Exception as e:
                     # print(e)
                     time.sleep(self.delay)
-                    continue
                 else:
                     return result
         return wrapper
@@ -86,7 +81,7 @@ fetch('http://www.baidu.com')
 
 
 
-#### 匿名函数lambda可以直接调用,不用把他赋值给变量
+### 匿名函数lambda可以直接调用,不用把他赋值给变量
 
 ```python
 >>> (lambda x, y=0,z=0:x+y+z)(3,5,6)
@@ -99,7 +94,7 @@ fetch('http://www.baidu.com')
 
 
 
-#### 字符串中去除空格换行符等
+### 字符串中去除空格换行符等
 
 ```python
 >>>a = 'a     b  \nc  \fd'
@@ -109,7 +104,7 @@ fetch('http://www.baidu.com')
 
 
 
-#### 字典dict.items()和dict.keys()
+### 字典dict.items()和dict.keys()
 
 ```python
 >>> dict = {'a': 1, 'b': 2, 'c': 3}
@@ -135,7 +130,7 @@ c
 
 
 
-#### 换行，制表，换页，回车　->   [\n\t\f\r]
+### 换行，制表，换页，回车　->   [\n\t\f\r]
 
 ```python
 >>> print('a\nb') ＃换行符　newline
@@ -151,13 +146,13 @@ b
 
 
 
-#### 字符串前面加'r'
+### 字符串前面加'r'
 
 在Python的string前面加上‘r’， 是为了告诉编译器这个string是个raw string，不要转意backslash '\' 。 例如，\n 在raw string中，是两个字符，\和n， 而不会转意为换行符。由于正则表达式和 \ 会有冲突，因此，当一个字符串使用了正则表达式后，最好在前面加上'r'。
 
 
 
-#### 字符串切割
+### 字符串切割
 
 **str.split(sep=None, maxsplit=-1)**  
 
@@ -179,7 +174,7 @@ type只是负责创建类,但创建的类的父类仍然是object.
 
 
 
-#### 单例模型
+### 单例模型
 
 老师之前用到的只是在整个项目中的某一个文件自定义一个类，然后在该py文件中实例化一个对象，别的文件调用这个实例化过一次的类的对象就叫他单例模式
 
@@ -205,9 +200,19 @@ print(b)
 <__main__.singleton object at 0x0000016D5191D320>
 ```
 
+或者
+
+```python
+class SingleTon(object):
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, '_instance'):
+            cls._instance = super(SingleTon, cls).__new__(cls, *args, **kwargs)
+        return cls._instance
+```
 
 
-#### 动态创建类
+
+### 动态创建类
 
 ```python
 >>> def fn(self, name='world'): # 先定义函数
@@ -225,7 +230,7 @@ Hello, world.
 
 
 
-#### metaclass
+### metaclass
 
 ```python
 # metaclass是类的模板，所以必须从`type`类型派生：
@@ -252,7 +257,7 @@ AttributeError: 'list' object has no attribute 'add'
 
 
 
-#### 简易ORM
+### 简易ORM
 
 ```python
 class Field(object):
@@ -331,17 +336,17 @@ SQL: INSERT INTO user (id, username, email, password) VALUES (12345, Michael, te
 
 
 
-#### markdown中显示\_\_init\_\_
+### markdown中显示\_\_init\_\_
 
 用\加下杠表示一个下杠
 
 
 
-#### 定义一个字典时最好使用d1 = dict(name='张三',age=14)这样的格式，比较清晰。
+### 定义一个字典时最好使用d1 = dict(name='张三',age=14)这样的格式，比较清晰。
 
 
 
-#### .copy方法所得到的对象的内存地址与原对象不同
+### .copy方法所得到的对象的内存地址与原对象不同
 
 ```python
 d1 = {'name':'张三','age':14}
@@ -356,7 +361,7 @@ print(id(d2))
 
 
 
-#### 字典的setdefalut,get,update方法
+### 字典的setdefalut,get,update方法
 
 - setdefault
 
@@ -415,7 +420,7 @@ pass
 
 
 
-#### \_\_next\_\_和\_\_iter\_\_的用法
+### \_\_next\_\_和\_\_iter\_\_的用法
 
 ```python
 class My_gen(object):
@@ -460,7 +465,7 @@ class My_gen(object):
 
 
 
-#### 自制生成器
+### 自制生成器
 
 ```python
 def f1():
@@ -479,7 +484,7 @@ def f1():
 
 
 
-#### python守护线程
+### python守护线程
 
 如果你设置一个线程为守护线程，，就表示你在说这个线程是不重要的，在进程退出的时候，不用等待这个线程退出。 
 如果你的主线程在退出的时候，不用等待那些子线程完成，那就设置这些线程的daemon属性。即，在线程开始（thread.start()）之前，调用setDeamon（）函数，设定线程的daemon标。thread.setDaemon(True)）就表示这个线程“不重要”。
@@ -550,7 +555,7 @@ main thread end
 
   
 
-#### Linux守护进程(daemon)详解与创建
+### Linux守护进程(daemon)详解与创建
 
 > **一、概述**
 >
@@ -564,7 +569,7 @@ main thread end
 
 
 
-#### SSL
+### SSL
 
 只要你听过HTTPS，不可能没听过SSL协议吧，SSL协议是一种安全协议。对于互联网协议没有了解的童鞋可以参考博主另一篇博客：[internet协议入门](http://blog.damonare.cn/2016/11/26/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8/)
 
@@ -646,7 +651,7 @@ HTTPS之所以安全就是因为加持了SSL这个外挂来对传输的数据进
 
 **这点SSL就玩的很巧妙了🤣**，通信双方通过对称加密来加密密文，然后使用非对称加密的方式来传递对称加密所使用的密钥。这样效率和安全就都能保证了。
 
-#### SSL协议的握手过程
+### SSL协议的握手过程
 
 先用语言来阐述下：
 
@@ -664,7 +669,7 @@ HTTPS之所以安全就是因为加持了SSL这个外挂来对传输的数据进
 
 
 
-#### 生成器开启的两种方式
+### 生成器开启的两种方式
 
 ```python
 def f():
@@ -687,17 +692,17 @@ f1.send(10)重新启动生成器，并且发送信息10，生成器函数中用x
 
 
 
-#### Pycharm中，导入的库没安装或没导入时，可以按alt+enter键自动导入或安装。
+### Pycharm中，导入的库没安装或没导入时，可以按alt+enter键自动导入或安装。
 
 Pycharm中,pip安装的包是通过https://pypi.python.org/simple中下载并安装的，但速度比较慢，可以把源改成https://mirrors.aliyun.con/pypi/simple
 
 
 
-#### 爬虫jobs暂停
+### 爬虫jobs暂停
 
 
 
-#### linux视频软件 MPV MEDIA PLAYER
+### linux视频软件 MPV MEDIA PLAYER
 
 
 
@@ -705,7 +710,7 @@ Pycharm中,pip安装的包是通过https://pypi.python.org/simple中下载并安
 
 
 
-#### str.lstrip和str.rstrip
+### str.lstrip和str.rstrip
 
 ```python
 def lstrip(self, chars=None): 
@@ -741,7 +746,7 @@ def rstrip(self, chars=None): # real signature unknown; restored from __doc__
 
 
 
-#### 阻塞队列
+### 阻塞队列
 
 ```python
 urls_queue.join()
@@ -751,7 +756,7 @@ urls_queue.join()
 
 
 
-#### 阻塞线程
+### 阻塞线程
 ```python
 import threading
 import time
@@ -769,7 +774,7 @@ print('结束')
 
 
 
-#### 阻塞进程
+### 阻塞进程
 
 ```python
 """
@@ -779,11 +784,11 @@ print('结束')
 
 
 
-#### Pycharm连按两次shift即可全局搜索
+### Pycharm连按两次shift即可全局搜索
 
 
 
-#### flask断点测试
+### flask断点测试
 
 from ipdb import set_trace
 
@@ -799,13 +804,13 @@ linux有postman客户端
 
 
 
-#### Pycharm中快速打印print('a')的方法->'a'.print
+### Pycharm中快速打印print('a')的方法->'a'.print
 
 模板中快速遍历，直接for然后按tab键，就直接出来了。
 
 
 
-#### python可视化工具pyecharts
+### python可视化工具pyecharts
 
 Echarts是百度出的很有名 也很叼。  Echarts 是百度开源的一个数据可视化 JS 库。主要用于数据可视化。  pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。
 
@@ -817,7 +822,7 @@ python数据分析:Numpy,pandas,scipy
 
 
 
-list方法insert
+### list方法insert
 
 ```python
 def insert(self, index, p_object): 
@@ -828,13 +833,13 @@ l = [1, 2]
 
 
 
-#### 浏览器强制刷新ctrl+shift+R
+### 浏览器强制刷新ctrl+shift+R
 
 pycharm整理代码ctrl + alt + L
 
 
 
-#### re模块
+### re模块
 
 ```python
 # 若都能匹配到，则
@@ -859,11 +864,11 @@ print(res3)
 
 
 
-#### pycharm取消联想使用esc
+### pycharm取消联想使用esc
 
 
 
-#### string库
+### string库
 
 ```python
 string.py
@@ -881,7 +886,7 @@ string.capword(s, sep=None) # 将一段话的首字母大写。
 
 
 
-#### 将一句话的首字母大写
+### 将一句话的首字母大写
 
 ```python
 def capword(s, sep=None)：
@@ -901,7 +906,7 @@ str.join()里面可以直接加列表生成器
 
 
 
-#### 判断一个字符串是不是数字还是字母
+### 判断一个字符串是不是数字还是字母
 
 ```python
 s.isdigits() # 判断字符串里是不是全是数字
@@ -911,11 +916,11 @@ s.isalnum() # 判断字符串里是不是字母和数字的组合
 
 
 
-#### Pycharm的Structure中的函数和类的顺序是按照字母顺序排列的
+### Pycharm的Structure中的函数和类的顺序是按照字母顺序排列的
 
 
 
-#### Python中super的用法
+### Python中super的用法
 
 super 是用来解决多重继承问题的，直接用类名调用父类方法在使用单继承的时候没问题，但是如果使用多继承，会涉及到查找顺序（MRO）、重复调用（钻石继承）等种种问题。总之前人留下的经验就是：保持一致性。要不全部用类名调用父类，要不就全部用 super，不要一半一半。
 
@@ -1009,7 +1014,7 @@ http://blog.csdn.net/johnsonguo/article/details/585193
 
 
 
-#### super内的参数可以省略
+### super内的参数可以省略
 
 ```python
 class Animal:
@@ -1030,7 +1035,7 @@ run
 
 
 
-#### 字典的get方法
+### 字典的get方法
 
 ```python
 def get(self, k, d=None): # real signature unknown; restored from __doc__
@@ -1047,7 +1052,7 @@ print(d.get('class'))
 
 
 
-#### os.path.basename()和os.path.dirname()
+### os.path.basename()和os.path.dirname()
 
 ```python
 >>> print(os.path.basename('/usr/bin/python3.6')) # 文件名
@@ -1058,7 +1063,7 @@ python3.6
 
 
 
-#### str.partition()方法
+### str.partition()方法
 
 ```python
  def partition(self, sep): # real signature unknown; restored from __doc__
@@ -1085,7 +1090,7 @@ python3.6
 
 
 
-#### 在python中切忌不要使用str,list,print等builtins.py内自带的方法
+### 在python中切忌不要使用str,list,print等builtins.py内自带的方法
 
 ```python
 >>> str = 'aaa'
@@ -1114,7 +1119,7 @@ TypeError: 'int' object is not callable
 
 
 
-#### enumerate用法
+### enumerate用法
 
 ```python
 >>> arr = [1, 2, 3]
@@ -1131,7 +1136,7 @@ TypeError: 'int' object is not callable
 
 
 
-#### json.dumps()返回一个json字符串
+### json.dumps()返回一个json字符串
 
 ```python
 Serialize ``obj`` to a JSON formatted ``str``
@@ -1145,7 +1150,7 @@ Serialize ``obj`` to a JSON formatted ``str``
 
 
 
-#### def f(x, \*, y)中\*的作用
+### def f(x, \*, y)中\*的作用
 
 相当于是位置参数和关键字参数的分割，\*号前面是位置参数，*号后面是关键字参数。所以def f(x, \*, y, z):和def f(x, *, y=None, z=None):都可以，但在之后赋值的时候关键词参数部分必须要以关键词参数赋值。
 
@@ -1169,17 +1174,17 @@ def f2(x, *, y=None, z=None, k=None)
 
 
 
-#### 什么是序列化
+### 什么是序列化
 
 序列化是把模型对象转化为JSON格式然后响应出去，便于客户端进行数据分析。
 
 
 
-#### shift+F6 全局修改变量名
+### shift+F6 全局修改变量名
 
 
 
-#### time模块
+### time模块
 
 ```python
 # 返回当前时间的时间戳，浮点数，不需要参数
@@ -1222,7 +1227,7 @@ print(w)
 
 
 
-#### 倒计时计时器
+### 倒计时计时器
 
 ```python
 import time
@@ -1239,7 +1244,7 @@ while num:
 
 
 
-#### property类
+### property类
 
 ```python
 class property(object):
@@ -1274,7 +1279,7 @@ class property(object):
 
 
 
-#### python nonlocal,global
+### python nonlocal,global
 
 ```python
 x = 100
@@ -1337,7 +1342,7 @@ SyntaxError: no binding for nonlocal 'x' found
 
 
 
-#### python是如何进行内存管理的
+### python是如何进行内存管理的
 
 **a、对象的引用计数机制**
 
@@ -1361,7 +1366,7 @@ Python提供了对内存的垃圾收集机制，但是它将不用的内存放�
 
 
 
-#### list.insert()方法
+### list.insert()方法
 
 ```python
 def insert(self, index, p_object): # real signature unknown; restored from __doc__
@@ -1377,7 +1382,7 @@ print(l)
 
 
 
-#### list.pop()方法
+### list.pop()方法
 
 ```python
 def pop(self, index=None): # real signature unknown; restored from __doc__
@@ -1400,7 +1405,7 @@ def pop(self, index=None): # real signature unknown; restored from __doc__
 
 
 
-#### Python关键词就是除了builtins.py中的方法，函数，变量，类之外的可以不用导入任何库就能直接使用的
+### Python关键词就是除了builtins.py中的方法，函数，变量，类之外的可以不用导入任何库就能直接使用的
 
 ```shell
 >>> help('keywords')
@@ -1420,7 +1425,7 @@ continue            global              pass
 
 
 
-#### re.sub()方法将字符串中的 old（旧字符串） 替换成 new(新字符串)
+### re.sub()方法将字符串中的 old（旧字符串） 替换成 new(新字符串)
 
 ```python
 def sub(pattern, repl, string, count=0, flags=0):
@@ -1443,28 +1448,53 @@ Hello*I'm*Mike!
 
 
 
-#### python深拷贝浅拷贝
+### python深拷贝浅拷贝
 
-python中对于列表，集合，字典，如果浅拷贝那么拷贝出来的对象和原对象内存地址相同，如若是深拷贝，拷贝出来的对象和原对象内存地址不同。
+python中对于列表，集合，字典，深拷贝和浅拷贝出来的对象与原对象的内存地址都不同，但是如果列表中有引用数据类型(比如列表中还有列表)，那么浅拷贝的引用数据类型的地址与原对象相同(相当于引用同一个地址)，但深拷贝的话引用数据类型会重新创建而不知直接引用，故其引用数据类型的地址与原对象不用
 
 ```python
 import copy
-l1 = [1, 2, 3]
+l1 = [1, [1, 2, 3], 3]
+l2 = copy.copy(l1)
+l3 = copy.deepcopy(l1)
 print(id(l1))
-l2 = copy.deepcopy(l1) # 深拷贝，原对象内存地址不同
 print(id(l2))
-l3 = copy.copy(l1) # 浅拷贝，与原对象内存地址相同
-print(id(l1))
+print(id(l3))
 
+print('-----------------')
+print(id(l1[1]))
+print(id(l2[1]))
+print(id(l3[1]))
 结果:
-140048729134216
-140048729133704
-140048729134216
+139940300931208
+139940300932872
+139940300931848
+-----------------
+139940300931720
+139940300931720
+139940300934152
+# 前拷贝的id(l2)与原对象的id(l1)相同，说明引用同一个内存地址
+```
+
+但对于字符串，数值以及元组等不可变数据类型，经过深拷贝和浅拷贝后内存地址均不变
+
+```python
+import copy
+s1 = 'hello'
+s2 =copy.copy(s1)
+s3 = copy.deepcopy(s1)
+print(id(s1))
+print(id(s2))
+print(id(s3))
+结果:
+140282846204120
+140282846204120
+140282846204120
 ```
 
 
 
-#### str.find()方法
+### str.find()方法
 
 ```python
 def find(self, sub, start=None, end=None): 
@@ -1492,7 +1522,7 @@ str.find()方法，返回在字符串中找到的第一个子串的下标。如�
 
 
 
-#### random.shuffle()方法
+### random.shuffle()方法
 
 ```python
 def shuffle(self, x, random=None):
@@ -1518,9 +1548,7 @@ None
 
 
 
-#### Python内置的eval()方法
-
-
+### Python内置的eval()方法
 
 **描述**
 
@@ -1567,7 +1595,7 @@ eval(expression[, globals[, locals]])
 
 
 
-#### 如何去除字符串中的所有空白字符
+### 如何去除字符串中的所有空白字符
 
 - 去除两边空白字符:str.strip()
 - 去除两边及中间空白字符:''.join(str.split())
@@ -1575,7 +1603,7 @@ eval(expression[, globals[, locals]])
 
 
 
-#### type方法可以直接获取对象的类，调用即可实例化
+### type方法可以直接获取对象的类，调用即可实例化
 
 ```python
 >>> cls = type([1, 2, 3])
@@ -1589,13 +1617,13 @@ eval(expression[, globals[, locals]])
 
 
 
-#### 异或
+### 异或
 
 如果a、b两个值不相同，则异或结果为1。如果a、b两个值相同，异或结果为0。
 
 
 
-#### Pycharm将一个变量的名称全局修改
+### Pycharm将一个变量的名称全局修改
 
 Ctrl+R 然后选择replace all
 
@@ -1603,7 +1631,7 @@ Ctrl+R 然后选择replace all
 
 
 
-#### Python类里面定义了\_\_repr\_\_的
+### Python类里面定义了\_\_repr\_\_的
 
 ```python
 >>> class A:
@@ -1621,13 +1649,13 @@ hello
 
 
 
-#### i.e.、e.g.、etc.
+### i.e.、e.g.、etc.
 
 ![124044119_1_20180206092712128](/home/andy/Desktop/Notes/124044119_1_20180206092712128.jpeg)
 
 
 
-#### raise后面要写上错误信息的详细说明
+### raise后面要写上错误信息的详细说明
 
 ```python
 raise IndexError
@@ -1657,7 +1685,7 @@ IndexError: Out of Index!
 
 
 
-#### 所有类都是type的实例化对象，但所有类的共同父类是object
+### 所有类都是type的实例化对象，但所有类的共同父类是object
 
 ```python
 from abc import ABCMeta, abstractmethod
@@ -1695,7 +1723,7 @@ print(isinstance(B(), A)) # True
 
 
 
-#### 继承一个类后，直接pass就能继承父类的方法与属性
+### 继承一个类后，直接pass就能继承父类的方法与属性
 
 ```python
 class A:
@@ -1717,7 +1745,7 @@ print(b.run())
 
 
 
-#### 格式化输出f'{arg}'
+### 格式化输出f'{arg}'
 
 ```python
 name = 'lily'
@@ -1727,7 +1755,7 @@ print(f'{name} is good girl!')
 
 
 
-#### return a, b 会返回一个元组
+### return a, b 会返回一个元组
 
 ```python
 def test(a, b):
@@ -1739,7 +1767,7 @@ print(test(1, 2))
 
 
 
-#### 魔术方法_\_str\_\_与\_\_repr\_\_的相同点与不同点
+### 魔术方法_\_str\_\_与\_\_repr\_\_的相同点与不同点
 
 **相同点**
 
@@ -1790,7 +1818,7 @@ print(l)
 
 
 
-#### 类中的私有变量
+### 类中的私有变量
 
 ```python
 class A:
@@ -1836,7 +1864,7 @@ print(b.__dict__)
 
 
 
-#### 类的\_\_dict\_\_和对象的\_\_dict\_\_的区别以及对象的\_\_dir\_\_方法
+### 类的\_\_dict\_\_和对象的\_\_dict\_\_的区别以及对象的\_\_dir\_\_方法
 
 ```python
 class Cat:
@@ -1885,7 +1913,7 @@ print(Cat('lily', 13).__dir__())
 
 
 
-#### 对象的方法也可以由类来调用
+### 对象的方法也可以由类来调用
 
 ```python
 class Cat:
@@ -1919,47 +1947,7 @@ print(lily.age)
 
 
 
-#### 输入一个字符串str，输出最长的对称字符串长度
-
-![699524491](/home/andy/Desktop/Notes/699524491.jpg)
-
-```python
-def count_sym(s):
-    length = len(s)
-    list_s = []
-    for i in range(length - 1):
-        if s[i] == s[i + 1]:
-            count = 2
-            key = 2 * i + 1
-            while i - 1 >= 0 and key - i + 1 <= length - 1:
-                i = i - 1
-                if s[i] != s[key - i]:
-                    break
-                count += 2
-            list_s.append(count)
-        try:
-            if s[i] == s[i + 2]:
-                count = 3
-                key = 2 * i + 2
-                while i - 1 >= 0 and key - i + 1 <= length - 1:
-                    i = i - 1
-                    if s[i] != s[key - i]:
-                        break
-                    count += 2
-                list_s.append(count)
-        except IndexError:
-            continue
-    return max(list_s)
-
-
-print(count_sym('0o1o0'))
-结果:
-5
-```
-
-
-
-#### 循环里continue
+### 循环里continue
 
 ```python
 for i in range(1, 10):
@@ -1974,7 +1962,7 @@ while True:
 
 
 
-#### range反序遍历
+### range反序遍历
 
 ```python
 for i in range(5, 0, -1):
@@ -1991,7 +1979,7 @@ range反序遍历的话，大的数字放前面，小的数字放后面，最后
 
 
 
-#### str.find和str.index的区别
+### str.find和str.index的区别
 
 python 字符串查找有4个方法，1 find, 2 index方法，3 rfind方法, 4 rindex方法
 
@@ -2032,7 +2020,7 @@ ValueError: substring not found
 
 
 
-#### list.index()方法
+### list.index()方法
 
 ```python
  def index(self, value, start=None, stop=None): 

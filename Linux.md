@@ -1121,7 +1121,9 @@ if __name__ == '__main__':
 
  
 
-### 每个Py程序的最开始都有 # /usr/bin/python , 这个到底是什么, 有什么作用?
+### 每个Py程序的最开始都有 #!/usr/bin/python , 这个到底是什么, 有什么作用?
+
+这个符号（#!）的名称，叫做”Shebang”或者”Sha-bang”（还有其他一些名称，不过我一般就用这两个）。
 
 这是脚本语言共同遵守的规则：当第一行为 #!/path/to/script/interpreter时，指定了用来执行本脚本的解释器。 
 
@@ -1204,4 +1206,173 @@ sudo du -sh /etc # -s代表summary 总结
 
 
 
- 
+###  Linux如何设置dns服务器地址
+
+修改DNS
+
+username@host:~$ vim /etc/resolv.conf
+
+添加nameserver 8.8.8.8 
+
+>8.8.8.8是GOOGLE公司提供的DNS，该地址是全球通用的，相对来说，更适合国外以及访问国外网站的用户使用。
+>
+>114.114.114.114是国内移动、电信和联通通用的DNS，手机和电脑端都可以使用，干净无广告，解析成功率相对来说更高，国内用户使用的比较多，而且速度相对快、稳定，是国内用户上网常用的DNS。
+
+重新加载网络配置
+
+这里说的重启网络服务，命令如下:
+
+username@host:~$ sudo /etc/init.d/networking restart
+
+注意：配置修改完成后必须重启网络服务后所做的修改才能生效。
+
+
+
+### source help文档
+
+```bash
+andy@mac-air:~$ source --help
+source: source filename [arguments]
+    Execute commands from a file in the current shell.
+    
+    Read and execute commands from FILENAME in the current shell.  The
+    entries in $PATH are used to find the directory containing FILENAME.
+    If any ARGUMENTS are supplied, they become the positional parameters
+    when FILENAME is executed.
+    
+    Exit Status:
+    Returns the status of the last command executed in FILENAME; fails if
+    FILENAME cannot be read.
+
+```
+
+
+
+### chmod +x ./test.sh使得test.sh文件对于所有用户都增加执行权限
+
+```shell
+andy@mac-air:~$ ll test.sh
+-rw-r--r-- 1 andy andy 34 Aug 31 20:01 test.sh
+andy@mac-air:~$ chmod +x ./test.sh 
+andy@mac-air:~$ ll test.sh
+-rwxr-xr-x 1 andy andy 34 Aug 31 20:01 test.sh*
+```
+
+
+
+### shell脚本
+
+> Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。
+>
+> Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。
+>
+> Ken Thompson 的 sh 是第一种 Unix Shell，Windows Explorer 是一个典型的图形界面 Shell。
+>
+> [**Shell 在线工具**](http://www.runoob.com/try/showbash.php?filename=helloworld)
+>
+> ------
+>
+> ## Shell 脚本
+>
+> Shell 脚本（shell script），是一种为 shell 编写的脚本程序。
+>
+> 业界所说的 shell 通常都是指 shell 脚本，但读者朋友要知道，shell 和 shell script 是两个不同的概念。
+>
+> 由于习惯的原因，简洁起见，本文出现的 "shell编程" 都是指 shell 脚本编程，不是指开发 shell 自身。
+>
+> ------
+>
+> ## Shell 环境
+>
+> Shell 编程跟 java、php 编程一样，只要有一个能编写代码的文本编辑器和一个能解释执行的脚本解释器就可以了。
+>
+> Linux 的 Shell 种类众多，常见的有：
+>
+> - Bourne Shell（/usr/bin/sh或/bin/sh）
+> - Bourne Again Shell（/bin/bash）
+> - C Shell（/usr/bin/csh）
+> - K Shell（/usr/bin/ksh）
+> - Shell for Root（/sbin/sh）
+> - ……
+>
+> 本教程关注的是 Bash，也就是 Bourne Again Shell，由于易用和免费，Bash 在日常工作中被广泛使用。同时，Bash 也是大多数Linux 系统默认的 Shell。
+>
+> 在一般情况下，人们并不区分 Bourne Shell 和 Bourne Again Shell，所以，像 **#!/bin/sh**，它同样也可以改为 **#!/bin/bash**。
+>
+> \#! 告诉系统其后路径所指定的程序即是解释此脚本文件的 Shell 程序。
+>
+> ------
+>
+> ## 第一个shell脚本
+>
+> 打开文本编辑器(可以使用 vi/vim 命令来创建文件)，新建一个文件 test.sh，扩展名为 sh（sh代表shell），扩展名并不影响脚本执行，见名知意就好，如果你用 php 写 shell 脚本，扩展名就用 php 好了。
+>
+> 输入一些代码，第一行一般是这样：
+>
+> ## 实例
+>
+> \#!/bin/bash
+> echo "Hello World !"
+>
+>  
+>
+> 运行实例 »
+>
+> \#! 是一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种 Shell。
+>
+> echo 命令用于向窗口输出文本。
+>
+> ### 运行 Shell 脚本有两种方法：
+>
+> **1、作为可执行程序**
+>
+> 将上面的代码保存为 test.sh，并 cd 到相应目录：
+>
+> ```
+> chmod +x ./test.sh  #使脚本具有执行权限
+> ./test.sh  #执行脚本
+> ```
+>
+> 注意，一定要写成 ./test.sh，而不是 **test.sh**，运行其它二进制的程序也一样，直接写 test.sh，linux 系统会去 PATH 里寻找有没有叫 test.sh 的，而只有 /bin, /sbin, /usr/bin，/usr/sbin 等在 PATH 里，你的当前目录通常不在 PATH 里，所以写成 test.sh 是会找不到命令的，要用 ./test.sh 告诉系统说，就在当前目录找。
+>
+> **2、作为解释器参数**
+>
+> 这种运行方式是，直接运行解释器，其参数就是 shell 脚本的文件名，如：
+>
+> ```
+> /bin/sh test.sh
+> /bin/php test.php
+> ```
+>
+> 这种方式运行的脚本，不需要在第一行指定解释器信息，写了也没用。
+
+
+
+### 查看python安装路径以及pip安装的包
+
+安装python2的pip
+
+```shell
+sudo apt-get install python-pip
+```
+
+查看pip安装了多少包
+
+```shell
+pip list
+```
+
+如果电脑有两个python,一个python2，一个python3，使用上面的命令查看的是python3中pip安装的包。要查看python2pip安装的包，如下：
+
+```shell
+python2 -m pip list 
+```
+
+同理要查看python3的pip安装的包，则如下:
+
+```shell
+python3 -m pip list
+```
+
+
+

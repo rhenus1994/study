@@ -1,0 +1,20 @@
+### 十秒钟取不到自动退出循环
+
+```python
+l = [1, 2, 3, 4, 5]
+flag = 0
+while True:
+    if flag:
+        if time.time() - start_time > 10:
+            break
+    try:
+        item = l.pop()
+        flag = 0
+        print(item)
+    except IndexError:
+        if flag == 1:
+            continue
+        flag = 1
+        start_time = time.time()
+```
+
