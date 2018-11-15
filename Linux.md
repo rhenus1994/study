@@ -119,7 +119,6 @@ start
 
     直接在终端输入vim ~/.vimrc,然后在配置文件中输入set number 或者set nu就可以了.以后想去除的时候注释掉即可.
 
-    
 
 ### linux查看外网IP方法
 
@@ -500,7 +499,6 @@ sudo apt install firefox
 
   **注意：两边必须要使用绝对路径，不然创建出来的软链接会显示The link "Linux.md" is broken.Move it to trash?**
 
-  
 
 ### sudo 出现unable to resolve host 解决方法
 
@@ -1375,4 +1373,17 @@ python3 -m pip list
 ```
 
 
+
+### pip升级包
+
+```bash
+pip install --upgrade xxx # 升级xxx包 
+```
+
+或者先删除包  再安装
+
+```shell
+pip uninstall xxx
+pip install xxx
+```
 
