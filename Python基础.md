@@ -8,13 +8,12 @@ import time
 from functools import wraps
 def runtime(func):
     @wraps(func)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args, *aaa*kwargs):
         start_time = time.time()
         result = func(*args, **kwargs)
         print('执行时间:',time.time() - start_time)
         return result
     return wrapper
-
 @runtime
 def add(a,b):
     print(a + b)
