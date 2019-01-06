@@ -1,5 +1,5 @@
-def split_line(s: str):
-    return [i.strip() for i in s.split('\n') if i.strip()]
+def split_lines(s: str):
+    return [line.strip() for line in s.split('\n') if line.strip()]
 
 
 def count_start_comma(s: str):
@@ -41,7 +41,7 @@ def append_node(initial, lst):
 
 
 def parse_to_json(s):
-    lst = restore(split_line(s))
+    lst = restore(split_lines(s))
     initial = {}
     for i in lst:
         append_node(initial, i)
@@ -65,5 +65,11 @@ if __name__ == '__main__':
     ,,模仿学习,直接模仿学习
     ,,,逆强化学习
     """
-    print(parse_to_json(s1))
-    print(parse_to_json(s2))
+    import sso
+    # print(parse_to_json(s1))
+    # print(parse_to_json(s2))
+    import re
+    from http import HTTPStatus
+
+    print(re.fullmatch(r'\d*', '123a'))
+    from flask import abort
